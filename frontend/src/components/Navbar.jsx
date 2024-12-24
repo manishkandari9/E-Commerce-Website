@@ -1,19 +1,256 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
+// import { X, Menu, LogIn, Moon, Sun } from 'lucide-react';
+// import Cookies from 'js-cookie';  // Import js-cookie library
+// import Auth from './Auth/auth'; // Import Auth component
+
+// const Navbar = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
+//   const [userPhoto, setUserPhoto] = useState('');
+//   const [isDarkMode, setIsDarkMode] = useState(false);
+//   const [showAuthModal, setShowAuthModal] = useState(false); // State to show/hide Auth modal
+
+//   const toggleMenu = () => {
+//     setIsOpen(!isOpen);
+//   };
+
+//   const toggleLogin = () => {
+//     setIsLoggedIn(!isLoggedIn);
+//     if (!isLoggedIn) {
+//       setUserPhoto('https://api.dicebear.com/6.x/initials/svg?seed=User');
+//     } else {
+//       setUserPhoto('');
+//     }
+//   };
+
+//   const toggleDarkMode = () => {
+//     const newDarkModeState = !isDarkMode;
+//     setIsDarkMode(newDarkModeState);
+//     Cookies.set('darkMode', newDarkModeState ? 'enabled' : 'disabled', { expires: 365 });
+//   };
+
+//   useEffect(() => {
+//     const darkModeCookie = Cookies.get('darkMode');
+//     if (darkModeCookie === 'enabled') {
+//       setIsDarkMode(true);
+//     } else {
+//       setIsDarkMode(false);
+//     }
+//   }, []);
+
+//   useEffect(() => {
+//     if (isDarkMode) {
+//       document.documentElement.classList.add('dark');
+//     } else {
+//       document.documentElement.classList.remove('dark');
+//     }
+//   }, [isDarkMode]);
+
+//   return (
+//     <nav className="bg-white dark:bg-gray-800 shadow-lg">
+//       <div className="max-w-7xl mx-auto px-1">
+//         <div className="flex justify-between items-center h-16">
+//           <div className="flex md:hidden">
+//             <button
+//               onClick={toggleMenu}
+//               className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
+//             >
+//               <span className="sr-only">Open main menu</span>
+//               {isOpen ? (
+//                 <X className="block h-6 w-6" aria-hidden="true" />
+//               ) : (
+//                 <Menu className="block h-6 w-6" aria-hidden="true" />
+//               )}
+//             </button>
+//           </div>
+
+//            <div className="flex items-center justify-start">
+//             <a href="/" className="flex items-center">
+//               <span className="font-semibold text-gray-900 dark:text-white text-lg">Logo</span>
+//             </a>
+//           </div>
+
+//           <div className="hidden md:flex md:items-center md:space-x-14">
+//             <a href="/" className="text-lg text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300">Home</a>
+//             <a href="/services" className="text-lg text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300">Destination</a>
+//             <a href="/about" className="text-lg text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300">Packages</a>
+//             <a href="/contact" className="text-lg text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300">Explore</a>
+//             <a href="/Booking" className="text-lg text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300">Booking</a>
+//             <a href="/About Us" className="text-lg text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300">About Us</a>
+
+
+//             <div className="relative">
+//               {isLoggedIn ? (
+//                 <div className="flex items-center space-x-2">
+//                   <img 
+//                     src={userPhoto} 
+//                     alt="User profile" 
+//                     className="w-8 h-8 rounded-full border-2 border-green-500"
+//                   />
+//                   <button
+//                     onClick={toggleLogin}
+//                     className="text-base font-medium text-gray-500 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400"
+//                   >
+//                     Log Out
+//                   </button>
+//                 </div>
+//               ) : (
+//                 <button
+//                   onClick={() => setShowAuthModal(true)} // Open Auth modal when clicked
+//                   className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400"
+//                 >
+//                   <LogIn className="mr-1" size={16} />
+//                   <span>Log In</span>
+//                 </button>
+//               )}
+//             </div>
+
+//             <button
+//               onClick={toggleDarkMode}
+//               className="text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300"
+//             >
+//               {isDarkMode ? (
+//                 <Sun className="h5 w-5" aria-hidden="true" />
+//               ) : (
+//                 <Moon className="h-5 w-5" aria-hidden="true" />
+//               )}
+//             </button>
+//           </div>
+
+//           <div className="flex md:hidden">
+//             <button
+//               onClick={toggleDarkMode}
+//               className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
+//             >
+//               {isDarkMode ? (
+//                 <Sun className="block h-6 w-6" aria-hidden="true" />
+//               ) : (
+//                 <Moon className="block h-6 w-6" aria-hidden="true" />
+//               )}
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+
+//       <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
+//         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+//           <a href="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700">Home</a>
+//           <a href="/services" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700">Services</a>
+//           <a href="/about" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700">About</a>
+//           <a href="/contact" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700">Contact</a>
+//         </div>
+//         <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+//           <div className="flex items-center px-5">
+//             {isLoggedIn ? (
+//               <>
+//                 <div className="flex-shrink-0">
+//                   <img className="h-10 w-10 rounded-full" src={userPhoto} alt="User profile" />
+//                 </div>
+//                 <div className="ml-3">
+//                   <div className="text-base font-medium text-gray-800 dark:text-gray-200">User Name</div>
+//                   <div className="text-sm font-medium text-gray-500 dark:text-gray-400">user@example.com</div>
+//                 </div>
+//               </>
+//             ) : (
+//               <button
+//                 onClick={() => setShowAuthModal(true)} // Open Auth modal on mobile too
+//                 className="flex-shrink-0 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700"
+//               >
+//                 Log In
+//               </button>
+//             )}
+//           </div>
+//           {isLoggedIn && (
+//             <div className="mt-3 px-2 space-y-1">
+//               <button
+//                 onClick={toggleLogin}
+//                 className="block w-full px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700"
+//               >
+//                 Log Out
+//               </button>
+//             </div>
+//           )}
+//         </div>
+//       </div>
+
+//       {/* Auth Modal */}
+//       {showAuthModal && <Auth onClose={() => setShowAuthModal(false)} />} {/* Pass onClose to close modal */}
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
+
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 import { X, Menu, LogIn, Moon, Sun } from 'lucide-react';
-import Cookies from 'js-cookie';  // Import js-cookie library
-import Auth from './Auth/auth'; // Import Auth component
+import * as THREE from 'three';
+import Cookies from 'js-cookie';
+import Auth from './Auth/auth';
+
+const AnimatedLogo = () => {
+  const meshRef = useRef();
+  const [hovered, setHovered] = useState(false);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime) * 0.2;
+      meshRef.current.rotation.y = Math.cos(state.clock.elapsedTime) * 0.2;
+      meshRef.current.scale.setScalar(hovered ? 1.2 : 1);
+    }
+  });
+
+  return (
+    <mesh 
+      ref={meshRef}
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+    >
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={hovered ? "#22c55e" : "#10B981"} />
+    </mesh>
+  );
+};
+
+const NavItem = ({ href, children }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  return (
+    <motion.a
+      href={href}
+      className="relative text-lg text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      {children}
+      <motion.div
+        className="absolute bottom-0 left-0 w-full h-0.5 bg-green-500"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
+      />
+      <motion.div
+        className="absolute top-0 left-0 w-full h-full bg-green-100 dark:bg-green-900 rounded-md z-[-1]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isHovered ? 0.2 : 0 }}
+        transition={{ duration: 0.2 }}
+      />
+    </motion.a>
+  );
+};
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userPhoto, setUserPhoto] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState(false); // State to show/hide Auth modal
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
+  const toggleMenu = () => setIsOpen(!isOpen);
   const toggleLogin = () => {
     setIsLoggedIn(!isLoggedIn);
     if (!isLoggedIn) {
@@ -31,91 +268,177 @@ const Navbar = () => {
 
   useEffect(() => {
     const darkModeCookie = Cookies.get('darkMode');
-    if (darkModeCookie === 'enabled') {
-      setIsDarkMode(true);
-    } else {
-      setIsDarkMode(false);
-    }
+    setIsDarkMode(darkModeCookie === 'enabled');
   }, []);
 
   useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
 
+  const navItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Destination', href: '/services' },
+    { name: 'Packages', href: '/about' },
+    { name: 'Explore', href: '/contact' },
+    { name: 'Booking', href: '/Booking' },
+    { name: 'About Us', href: '/About Us' },
+  ];
+
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-lg">
-      <div className="max-w-6xl mx-auto px-4">
+    <motion.nav
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="bg-white dark:bg-gray-800 shadow-lg"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex md:hidden">
-            <button
+            <motion.button
+              whileTap={{ scale: 0.95 }}
               onClick={toggleMenu}
               className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
             >
               <span className="sr-only">Open main menu</span>
-              {isOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
+              <AnimatePresence mode="wait" initial={false}>
+                {isOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90 }}
+                    animate={{ rotate: 0 }}
+                    exit={{ rotate: 90 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className="block h-6 w-6" aria-hidden="true" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="open"
+                    initial={{ rotate: 90 }}
+                    animate={{ rotate: 0 }}
+                    exit={{ rotate: -90 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className="block h-6 w-6" aria-hidden="true" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </div>
 
-          <div className="flex-1 flex items-center justify-center md:justify-start">
-            <a href="/" className="flex items-center">
-              <span className="font-semibold text-gray-900 dark:text-white text-lg">Logo</span>
-            </a>
+          <div className="flex items-center justify-start">
+            <motion.a
+              href="/"
+              className="flex items-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="w-10 h-10 mr-2">
+                <Canvas>
+                  <ambientLight intensity={0.5} />
+                  <pointLight position={[10, 10, 10]} />
+                  <OrbitControls enableZoom={false} enablePan={false} />
+                  <AnimatedLogo />
+                </Canvas>
+              </div>
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="font-semibold text-gray-900 dark:text-white text-lg"
+              >
+                Logo
+              </motion.span>
+            </motion.a>
           </div>
 
-          <div className="hidden md:flex md:items-center md:space-x-10">
-            <a href="/" className="text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300">Home</a>
-            <a href="/services" className="text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300">Services</a>
-            <a href="/about" className="text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300">About</a>
-            <a href="/contact" className="text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300">Contact</a>
+          <motion.div
+            className="hidden md:flex md:items-center md:space-x-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            <AnimatePresence>
+              {navItems.map((item, index) => (
+                <NavItem key={item.name} href={item.href}>
+                  {item.name}
+                </NavItem>
+              ))}
+            </AnimatePresence>
 
             <div className="relative">
               {isLoggedIn ? (
-                <div className="flex items-center space-x-2">
-                  <img 
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex items-center space-x-2"
+                >
+                  <motion.img 
                     src={userPhoto} 
                     alt="User profile" 
                     className="w-8 h-8 rounded-full border-2 border-green-500"
+                    whileHover={{ scale: 1.1, rotate: 360 }}
+                    transition={{ duration: 0.5 }}
                   />
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={toggleLogin}
-                    className="text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400"
+                    className="text-base font-medium text-gray-500 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400"
                   >
                     Log Out
-                  </button>
-                </div>
+                  </motion.button>
+                </motion.div>
               ) : (
-                <button
-                  onClick={() => setShowAuthModal(true)} // Open Auth modal when clicked
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setShowAuthModal(true)}
                   className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400"
                 >
                   <LogIn className="mr-1" size={16} />
                   <span>Log In</span>
-                </button>
+                </motion.button>
               )}
             </div>
 
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: 180 }}
+              whileTap={{ scale: 0.9 }}
               onClick={toggleDarkMode}
               className="text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300"
             >
-              {isDarkMode ? (
-                <Sun className="h-5 w-5" aria-hidden="true" />
-              ) : (
-                <Moon className="h-5 w-5" aria-hidden="true" />
-              )}
-            </button>
-          </div>
+              <AnimatePresence mode="wait" initial={false}>
+                {isDarkMode ? (
+                  <motion.div
+                    key="sun"
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 20, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Sun className="h-5 w-5" aria-hidden="true" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="moon"
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 20, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Moon className="h-5 w-5" aria-hidden="true" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          </motion.div>
 
           <div className="flex md:hidden">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: 180 }}
+              whileTap={{ scale: 0.9 }}
               onClick={toggleDarkMode}
               className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
             >
@@ -124,56 +447,97 @@ const Navbar = () => {
               ) : (
                 <Moon className="block h-6 w-6" aria-hidden="true" />
               )}
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
 
-      <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a href="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700">Home</a>
-          <a href="/services" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700">Services</a>
-          <a href="/about" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700">About</a>
-          <a href="/contact" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700">Contact</a>
-        </div>
-        <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex items-center px-5">
-            {isLoggedIn ? (
-              <>
-                <div className="flex-shrink-0">
-                  <img className="h-10 w-10 rounded-full" src={userPhoto} alt="User profile" />
-                </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium text-gray-800 dark:text-gray-200">User Name</div>
-                  <div className="text-sm font-medium text-gray-500 dark:text-gray-400">user@example.com</div>
-                </div>
-              </>
-            ) : (
-              <button
-                onClick={() => setShowAuthModal(true)} // Open Auth modal on mobile too
-                className="flex-shrink-0 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700"
-              >
-                Log In
-              </button>
-            )}
-          </div>
-          {isLoggedIn && (
-            <div className="mt-3 px-2 space-y-1">
-              <button
-                onClick={toggleLogin}
-                className="block w-full px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700"
-              >
-                Log Out
-              </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden"
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              {navItems.map((item, index) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <NavItem href={item.href}>
+                    {item.name}
+                  </NavItem>
+                </motion.div>
+              ))}
             </div>
-          )}
-        </div>
-      </div>
+            <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex items-center px-5">
+                {isLoggedIn ? (
+                  <>
+                    <div className="flex-shrink-0">
+                      <motion.img 
+                        className="h-10 w-10 rounded-full" 
+                        src={userPhoto} 
+                        alt="User profile"
+                        whileHover={{ scale: 1.1, rotate: 360 }}
+                        transition={{ duration: 0.5 }}
+                      />
+                    </div>
+                    <div className="ml-3">
+                      <div className="text-base font-medium text-gray-800 dark:text-gray-200">User Name</div>
+                      <div className="text-sm font-medium text-gray-500 dark:text-gray-400">user@example.com</div>
+                    </div>
+                  </>
+                ) : (
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setShowAuthModal(true)}
+                    className="flex-shrink-0 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700"
+                  >
+                    Log In
+                  </motion.button>
+                )}
+              </div>
+              {isLoggedIn && (
+                <div className="mt-3 px-2 space-y-1">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={toggleLogin}
+                    className="block w-full px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700"
+                  >
+                    Log Out
+                  </motion.button>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* Auth Modal */}
-      {showAuthModal && <Auth onClose={() => setShowAuthModal(false)} />} {/* Pass onClose to close modal */}
-    </nav>
+      <AnimatePresence>
+        {showAuthModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          >
+            <Auth onClose={() => setShowAuthModal(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 
 export default Navbar;
+
+
