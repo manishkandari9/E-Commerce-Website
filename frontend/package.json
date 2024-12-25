@@ -14,9 +14,11 @@
     "@react-three/fiber": "^8.17.10",
     "framer-motion": "^11.15.0",
     "js-cookie": "^3.0.5",
+    "lucide-react": "^0.469.0",
     "postcss-nesting": "^13.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-image": "^4.1.0",
     "react-router-dom": "^7.1.1",
     "three": "^0.171.0"
   },
