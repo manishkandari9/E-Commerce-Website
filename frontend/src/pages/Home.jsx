@@ -21,13 +21,13 @@ function Button({ variant, className, children, ...props }) {
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const carouselRef = useRef(null);
+  const carouselRef = useRef(null); // Reference to the carousel container
 
   const slides = [
-    '/kunjapuri.jpg',
-    '/dharidevi.jpg',
-    '/badri.jpg',
-    '/Dev.jpg',
+    "/kun.jpg",
+    '/dha.png',
+    "/kun.jpg",
+    '/dha.png',
   ];
 
   const slideTexts = [
@@ -55,48 +55,51 @@ export default function HeroSection() {
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
+    // Scroll to next slide
     if (carouselRef.current) {
-      carouselRef.current.scrollTo({
-        left: carouselRef.current.scrollLeft + carouselRef.current.offsetWidth,
-        behavior: 'smooth'
+      carouselRef.current.scrollBy({
+        left: carouselRef.current.clientWidth, // Scroll by the width of one slide
+        behavior: 'smooth',
       });
     }
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    // Scroll to previous slide
     if (carouselRef.current) {
-      carouselRef.current.scrollTo({
-        left: carouselRef.current.scrollLeft - carouselRef.current.offsetWidth,
-        behavior: 'smooth'
+      carouselRef.current.scrollBy({
+        left: -carouselRef.current.clientWidth, // Scroll by the width of one slide
+        behavior: 'smooth',
       });
     }
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
-    return () => clearInterval(interval);
+    const interval = setInterval(nextSlide, 5000);  // Auto-slide every 5 seconds
+    return () => clearInterval(interval);  // Clear interval on component unmount
   }, []);
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
       <Navbar />
 
-      {/* Background Image - Only visible on desktop */}
+      {/* Background Image for Desktop */}
       <div className="absolute inset-0 mt-[70px] hidden lg:block">
         <img
           src={slides[currentSlide]}
           alt="Adventure background"
-          className="object-cover w-full h-full"
+          className="object-cover w-full h-full transition-opacity duration-500"
+          style={{ filter: "brightness(0.95)" }} // Adds a darkening filter to enhance text readability
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" /> {/* Adds a gradient overlay */}
       </div>
 
       <div className="relative z-10 flex min-h-screen flex-col">
         {/* Mobile and Tablet View */}
         <div className="lg:hidden w-full mt-[90px] pb-8 relative">
           <div 
-            ref={carouselRef}
+            ref={carouselRef} // Reference the carousel container here
             className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
             style={{ scrollSnapType: 'x mandatory' }}
           >
@@ -113,28 +116,28 @@ export default function HeroSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                   <div className="absolute bottom-0 w-full p-6">
-                  <h2 className="text-white text-2xl font-bold mt-4 mb-2 font-serif">
+                    <h2 className="text-white text-2xl font-bold mt-4 mb-2 font-serif">
                       {slideTexts[index].title}
                     </h2>
                     <h3 className="text-yellow-400 text-xl font-semibold mt-2 mb-2">
                       {slideTexts[index].subtitle}
                     </h3>
                     <div className="relative">
-                    <p className="text-white/90 text-sm mb-2 mt-2 line-clamp-4 pr-14">
-                          {slideTexts[index].description}
-                        </p>
-                        {/* Circular Button with 4px gap from right and 1px from the bottom */}
-                           <button
-                              onClick={nextSlide}
-                                className="absolute right-1 bottom-6 top-12 w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center hover:bg-yellow-500 transition-all duration-300"> 
-                                 <ChevronRight className="h-5 w-5 text-black"/>
-                            </button>
-                     </div>
+                      <p className="text-white/90 text-sm mb-2 mt-2 line-clamp-4 pr-14">
+                        {slideTexts[index].description}
+                      </p>
+                      <button
+                        onClick={nextSlide}
+                        className="absolute right-1 bottom-6 top-12 w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center hover:bg-yellow-500 transition-all duration-300"> 
+                        <ChevronRight className="h-5 w-5 text-black"/>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+
           {/* Navigation Arrows for Mobile */}
           <button
             onClick={prevSlide}
@@ -153,7 +156,7 @@ export default function HeroSection() {
         {/* Desktop View */}
         <div className="hidden lg:flex relative z-10 flex-col md:flex-row">
           {/* Left Content */}
-          <div className="w-full md:w-[45%] px-6 md:px-20 flex flex-col justify-center mt-[10vh] z-20">
+          <div className="w-full md:w-[45%] px-6 md:px-20 flex flex-col justify-center mt-[10vh] z-20 mt-48">
             <h2 className="text-yellow-400 text-2xl font-semibold mb-2">
               {slideTexts[currentSlide].subtitle}
             </h2>
@@ -177,25 +180,28 @@ export default function HeroSection() {
           </div>
 
           {/* Right Content - Carousel */}
-          <div className="w-full md:w-[55%] flex items-center mt-20">
+          <div className="w-full md:w-[55%] flex items-center mt-48">
             <div className="w-full">
               <div className="relative">
                 <div className="flex gap-4 mt-64">
-                  <div className="overflow-hidden flex gap-4">
+                  <div className="overflow-hidden flex gap-4 relative w-[840px] h-[250px]">
                     {slides.map((slide, index) => (
                       <div
                         key={index}
-                        className={`transition-transform duration-500 ease-in-out flex-shrink-0 ${
-                          index === currentSlide ? 'scale-105' : 'scale-100'
+                        className={`transition-all duration-500 ease-in-out absolute ${
+                          index === currentSlide
+                            ? 'z-20 left-0 scale-105'
+                            : index === (currentSlide + 1) % slides.length
+                            ? 'z-10 left-[210px]'
+                            : index === (currentSlide + 2) % slides.length
+                            ? 'z-0 left-[420px]'
+                            : 'z-30 left-[630px] scale-95 opacity-50'
                         }`}
-                        style={{
-                          transform: `translateX(-${currentSlide * 105}%)`
-                        }}
                       >
                         <img
                           src={slide}
                           alt={`Adventure slide ${index + 1}`}
-                          className="rounded-xl object-cover h-[250px] w-[100%]"
+                          className="rounded-xl object-cover h-[250px] w-[200px]"
                         />
                       </div>
                     ))}
@@ -217,7 +223,7 @@ export default function HeroSection() {
                     <ChevronRight className="h-6 w-6" />
                   </button>
                   <div className="border-t-2 border-white/30 w-96" />
-                  <div className="text-6xl font-bold text-white">
+                  <div className="text-6xl font-bold text-white"> 
                     0{currentSlide + 1}
                   </div>
                 </div>
@@ -229,4 +235,3 @@ export default function HeroSection() {
     </div>
   );
 }
-
