@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
+import ExploreDestinations from './ExploreDestinations';
 
 function Button({ variant, className, children, ...props }) {
   const baseStyle = "px-4 py-2 rounded text-lg font-semibold focus:outline-none";
@@ -81,6 +82,7 @@ export default function HeroSection() {
   }, []);
 
   return (
+    <>
     <div className="relative min-h-screen w-full overflow-hidden">
       <Navbar />
 
@@ -233,5 +235,7 @@ export default function HeroSection() {
         </div>
       </div>
     </div>
+     <ExploreDestinations />
+     </>
   );
 }
