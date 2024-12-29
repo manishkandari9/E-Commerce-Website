@@ -26,18 +26,18 @@ const AnimatedLogo = () => {
       onPointerOut={() => setHovered(false)}
     >
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? "#22c55e" : "#10B981"} />
+      <meshStandardMaterial color={hovered ? "#ffc107" : "#03a9f4"} />
     </mesh>
   );
 };
 
 const NavItem = ({ href, children }) => {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   return (
     <motion.a
       href={href}
-      className="relative px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-green-100 dark:hover:bg-green-800 transition-colors duration-200"
+      className="relative px-3 py-2 rounded-md text-sm font-medium text-orange-400 dark:text-neutral-200 hover:text-green-400 transition-colors duration-200"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       whileHover={{ scale: 1.05 }}
@@ -45,7 +45,7 @@ const NavItem = ({ href, children }) => {
     >
       {children}
       <motion.div
-        className="absolute bottom-0 left-0 w-full h-0.5 bg-green-500"
+        className="absolute bottom-0 left-0 w-full h-0.5 bg-secondary-500"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: isHovered ? 1 : 0 }}
         transition={{ duration: 0.2 }}
@@ -53,6 +53,7 @@ const NavItem = ({ href, children }) => {
     </motion.a>
   );
 };
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -100,7 +101,7 @@ const Navbar = () => {
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-gradient-to-r from-green-400 to-blue-500 dark:from-green-800 dark:to-blue-900 shadow-lg"
+      className="bg-gradient-to-r from-black via-gray-900 to-transparent dark:from-black dark:via-gray-800 dark:to-black shadow-lg"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -108,7 +109,7 @@ const Navbar = () => {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={toggleMenu}
-              className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
+              className="text-neutral-700 dark:text-neutral-200 hover:text-neutral-800 dark:hover:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-500"
             >
               <span className="sr-only">Open main menu</span>
               <AnimatePresence mode="wait" initial={false}>
@@ -188,7 +189,7 @@ const Navbar = () => {
                   <motion.img 
                     src={userPhoto} 
                     alt="User profile" 
-                    className="w-8 h-8 rounded-full border-2 border-green-500"
+                    className="w-8 h-8 rounded-full border-2 border-secondary-500"
                     whileHover={{ scale: 1.1, rotate: 360 }}
                     transition={{ duration: 0.5 }}
                   />
@@ -196,7 +197,7 @@ const Navbar = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={toggleLogin}
-                    className="text-base font-medium text-gray-500 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400"
+                    className="text-base font-medium text-neutral-700 dark:text-neutral-300 hover:text-secondary-500 dark:hover:text-secondary-400"
                   >
                     Log Out
                   </motion.button>
@@ -206,7 +207,7 @@ const Navbar = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setShowAuthModal(true)}
-                  className="text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400"
+                  className="text-neutral-700 dark:text-neutral-300 hover:text-secondary-500 dark:hover:text-secondary-400"
                 >
                   <User className="h-6 w-6" />
                 </motion.button>
@@ -217,7 +218,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.1, rotate: 180 }}
               whileTap={{ scale: 0.9 }}
               onClick={toggleDarkMode}
-              className="text-gray-500 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-300"
+              className="text-neutral-700 dark:text-neutral-300 hover:text-secondary-500 dark:hover:text-secondary-400"
             >
               <AnimatePresence mode="wait" initial={false}>
                 {isDarkMode ? (
@@ -250,7 +251,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.1, rotate: 180 }}
               whileTap={{ scale: 0.9 }}
               onClick={toggleDarkMode}
-              className="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
+              className="text-neutral-700 dark:text-neutral-200 hover:text-neutral-800 dark:hover:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary-500"
             >
               {isDarkMode ? (
                 <Sun className="block h-6 w-6" aria-hidden="true" />
@@ -308,7 +309,7 @@ const Navbar = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setShowAuthModal(true)}
-                    className="flex-shrink-0 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700"
+                    className="flex-shrink-0 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-neutral-900 bg-secondary-500 hover:bg-secondary-600"
                   >
                     Log In
                   </motion.button>
@@ -320,7 +321,7 @@ const Navbar = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={toggleLogin}
-                    className="block w-full px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-700"
+                    className="block w-full px-3 py-2 rounded-md text-base font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 hover:bg-secondary-50 dark:hover:text-white dark:hover:bg-secondary-700"
                   >
                     Log Out
                   </motion.button>
@@ -349,4 +350,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

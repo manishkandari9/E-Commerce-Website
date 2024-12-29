@@ -1,9 +1,18 @@
-'use client'
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, MapPin, Calendar, Users, Loader, Info } from 'lucide-react';
 
+const gradientTextStyle = `
+  @keyframes gradientText {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .gradient-text {
+    background-size: 200% auto;
+    animation: gradientText 5s ease infinite;
+  }
+`;
 
 const destinations = [
   {
@@ -108,141 +117,110 @@ const destinations = [
   }
 ];
 
-interface DestinationCardProps {
-  destination: {
-    name: string;
-    description: string;
-    image: string;
-    details: {
-      duration: string;
-      bestTime: string;
-      groupSize: string;
-    };
-  };
-  index: number;
-  isMobile: boolean;
-  isDarkMode: boolean;
-}
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      type: "spring",
+      stiffness: 100,
+      damping: 12,
+      duration: 0.5 
+    } 
+  },
+  hover: { 
+    scale: 1.03, 
+    transition: { 
+      type: "spring", 
+      stiffness: 300, 
+      damping: 10 
+    } 
+  },
+};
 
-function DestinationCard({ destination, index, isMobile, isDarkMode }: DestinationCardProps) {
+function DestinationCard({ destination, index, isMobile }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const cardBg = isDarkMode ? 'bg-gray-800' : 'bg-white';
-  const textColor = isDarkMode ? 'text-gray-200' : 'text-gray-800';
-  const descriptionColor = isDarkMode ? 'text-gray-300' : 'text-gray-600';
+  const cardBg = 'bg-white dark:bg-gray-800';
+  const textColor = 'text-gray-800 dark:text-gray-200';
+  const descriptionColor = 'text-gray-600 dark:text-gray-300';
 
-  if (isMobile) {
-    return (
-      <motion.div
-        className={`${cardBg} rounded-xl overflow-hidden shadow-lg mb-6 relative`}
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-      >
-        <div className="relative h-64">
-          <img
-            src={destination.image}
-            alt={destination.name}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-          <h3 className="absolute bottom-4 left-4 text-white text-2xl font-bold">{destination.name}</h3>
-        </div>
-        <div className="p-4">
-          <p className={`${descriptionColor} mb-4 text-lg`}>{destination.description}</p>
-          <motion.button
-            className={`absolute top-2 right-2 ${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-full p-2 shadow-lg`}
-            onClick={() => setIsExpanded(!isExpanded)}
-            whileHover={{ scale: 1.1, rotate: 180 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <Info className={`w-6 h-6 ${isDarkMode ? 'text-blue-400' : 'text-blue-500'} transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-          </motion.button>
-          <AnimatePresence>
-            {isExpanded && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className={`mt-4 pt-4 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}
-              >
-                <div className="flex items-center mb-2">
-                  <Calendar className={`w-5 h-5 mr-2 ${isDarkMode ? 'text-blue-400' : 'text-blue-500'}`} />
-                  <span className={`text-base ${textColor}`}>Duration: {destination.details.duration}</span>
-                </div>
-                <div className="flex items-center mb-2">
-                  <Users className={`w-5 h-5 mr-2 ${isDarkMode ? 'text-green-400' : 'text-green-500'}`} />
-                  <span className={`text-base ${textColor}`}>Best for: {destination.details.groupSize}</span>
-                </div>
-                <div className="flex items-center">
-                  <MapPin className={`w-5 h-5 mr-2 ${isDarkMode ? 'text-red-400' : 'text-red-500'}`} />
-                  <span className={`text-base ${textColor}`}>Best time: {destination.details.bestTime}</span>
-                </div>
-              </motion.div>
+  const cardContent = (
+    <>
+      <div className="relative overflow-hidden group">
+        <img
+          src={destination.image}
+          alt={destination.name}
+          className="w-full h-56 sm:h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-70"></div>
+        <motion.div 
+          className="absolute bottom-0 left-0 right-0 p-4"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <h3 className="text-white font-bold leading-tight">
+            <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl block mb-1">{destination.name.split(',')[0]}</span>
+            {destination.name.includes(',') && (
+              <span className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 block">
+                {destination.name.split(',')[1].trim()}
+              </span>
             )}
-          </AnimatePresence>
-        </div>
-      </motion.div>
-    );
-  } else {
-    return (
-      <motion.div
-        className={`${cardBg} rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300`}
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -50 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-      >
-        <div className="relative">
-          <img
-            src={destination.image}
-            alt={destination.name}
-            className="w-full h-48 object-cover"
-          />
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black opacity-60"></div>
-          <h3 className="absolute bottom-4 left-4 text-white text-2xl font-bold">{destination.name}</h3>
-        </div>
-        <div className="p-6">
-          <p className={`${descriptionColor} mb-4 text-lg`}>{destination.description}</p>
-          <motion.div
-            initial={false}
-            animate={{ height: isExpanded ? 'auto' : 0 }}
-            className="overflow-hidden"
-          >
-            <div className={`pt-4 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-              <div className="flex items-center mb-2">
-                <Calendar className={`w-5 h-5 mr-2 ${isDarkMode ? 'text-blue-400' : 'text-blue-500'}`} />
-                <span className={`text-base ${textColor}`}>Duration: {destination.details.duration}</span>
-              </div>
-              <div className="flex items-center mb-2">
-                <Users className={`w-5 h-5 mr-2 ${isDarkMode ? 'text-green-400' : 'text-green-500'}`} />
-                <span className={`text-base ${textColor}`}>Best for: {destination.details.groupSize}</span>
-              </div>
-              <div className="flex items-center">
-                <MapPin className={`w-5 h-5 mr-2 ${isDarkMode ? 'text-red-400' : 'text-red-500'}`} />
-                <span className={`text-base ${textColor}`}>Best time: {destination.details.bestTime}</span>
-              </div>
+          </h3>
+        </motion.div>
+      </div>
+      <div className="p-4 sm:p-6">
+        <p className={`${descriptionColor} mb-4 text-sm sm:text-base line-clamp-3`}>{destination.description}</p>
+        <motion.div
+          initial={false}
+          animate={{ height: isExpanded ? 'auto' : 0 }}
+          className="overflow-hidden"
+        >
+          <div className={`pt-4 border-t border-gray-200 dark:border-gray-700`}>
+            <div className="flex items-center mb-2">
+              <Calendar className={`w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-500 dark:text-blue-400`} />
+              <span className={`text-sm sm:text-base ${textColor}`}>Duration: {destination.details.duration}</span>
             </div>
-          </motion.div>
-          <motion.button
-            className={`mt-4 flex items-center ${isDarkMode ? 'text-blue-400' : 'text-blue-600'} font-semibold focus:outline-none`}
-            onClick={() => setIsExpanded(!isExpanded)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {isExpanded ? 'Less Info' : 'More Info'}
-            <ChevronRight className={`ml-1 w-5 h-5 transition-transform ${
-              isExpanded ? 'transform rotate-90' : ''
-            }`} />
-          </motion.button>
-        </div>
-      </motion.div>
-    );
-  }
+            <div className="flex items-center mb-2">
+              <Users className={`w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-500 dark:text-green-400`} />
+              <span className={`text-sm sm:text-base ${textColor}`}>Best for: {destination.details.groupSize}</span>
+            </div>
+            <div className="flex items-center">
+              <MapPin className={`w-4 h-4 sm:w-5 sm:h-5 mr-2 text-red-500 dark:text-red-400`} />
+              <span className={`text-sm sm:text-base ${textColor}`}>Best time: {destination.details.bestTime}</span>
+            </div>
+          </div>
+        </motion.div>
+        <button
+          className={`mt-4 flex items-center justify-between w-full text-blue-600 dark:text-blue-400 font-semibold focus:outline-none text-sm sm:text-base bg-blue-50 dark:bg-blue-900/30 px-4 py-2 rounded-md transition-colors duration-200 hover:bg-blue-100 dark:hover:bg-blue-800/40`}
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          <span>{isExpanded ? 'Less Info' : 'More Info'}</span>
+          <ChevronRight className={`ml-1 w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 ${
+            isExpanded ? 'transform rotate-90' : ''
+          }`} />
+        </button>
+      </div>
+    </>
+  );
+
+  return (
+    <motion.div
+      className={`${cardBg} rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300`}
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+      whileHover="hover"
+      layout
+    >
+      {cardContent}
+    </motion.div>
+  );
 }
 
-export default function ExploreDestinations({ isDarkMode }: { isDarkMode: boolean }) {
+export default function ExploreDestinations() {
   const [visibleCards, setVisibleCards] = useState(6);
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -267,31 +245,61 @@ export default function ExploreDestinations({ isDarkMode }: { isDarkMode: boolea
     }, 1000);
   };
 
-  const sectionBg = isDarkMode ? 'bg-gradient-to-b from-gray-900 to-gray-800' : 'bg-gradient-to-b from-gray-50 to-white';
-  const headingColor = isDarkMode ? 'text-gray-100' : 'text-gray-900';
+  const sectionBg = 'bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800';
+  const headingColor = 'text-gray-900 dark:text-gray-100';
 
   return (
-    <section className={`py-20 ${sectionBg}`}>
-      <div className="container mx-auto px-4">
-        <h2 className={`text-5xl font-bold text-center mb-12 ${headingColor}`}>Explore Incredible India</h2>
-        <div className={`${isMobile ? '' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'}`}>
+    <section className={`py-4 sm:py-20 ${sectionBg}`}>
+      <style>{gradientTextStyle}</style>
+      <div className="container mx-auto px-8 sm:px-8 lg:px-8">
+        <motion.h2 
+          className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 ${headingColor} relative overflow-hidden`}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="inline-block transform -skew-x-12 bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text">
+            Explore
+          </span>{" "}
+          <span className="inline-block relative">
+            Incredible
+            <motion.span
+              className="absolute bottom-0 left-0 w-full h-1 bg-yellow-400"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            />
+          </span>{" "}
+          <span className="inline-block transform skew-x-12 bg-gradient-to-r from-green-500 to-blue-500 text-transparent bg-clip-text">
+            India
+          </span>
+        </motion.h2>
+        <motion.div 
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8`}
+          layout
+        >
           <AnimatePresence>
             {destinations.slice(0, visibleCards).map((dest, index) => (
-              <DestinationCard key={index} destination={dest} index={index} isMobile={isMobile} isDarkMode={isDarkMode} />
+              <DestinationCard key={dest.name} destination={dest} index={index} isMobile={isMobile} />
             ))}
           </AnimatePresence>
-        </div>
+        </motion.div>
         {visibleCards < destinations.length && (
-          <div className="text-center mt-12">
+          <motion.div 
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
             <motion.button
               className={`relative overflow-hidden ${
                 isMobile
-                  ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-4 px-8 rounded-full font-bold text-xl shadow-lg'
-                  : `${isDarkMode ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-blue-600 hover:bg-blue-700'} text-white py-3 px-8 rounded-lg font-semibold text-xl`
+                  ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-3 px-6 rounded-full font-bold text-lg shadow-lg'
+                  : 'bg-blue-600 hover:bg-blue-700 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white py-3 px-8 rounded-lg font-semibold text-xl'
               } transition-all duration-300`}
               onClick={loadMore}
               disabled={isLoading}
-              whileHover={isMobile ? { scale: 1.05 } : { scale: 1.05 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               {isLoading ? (
@@ -313,7 +321,7 @@ export default function ExploreDestinations({ isDarkMode }: { isDarkMode: boolea
                 </>
               )}
             </motion.button>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

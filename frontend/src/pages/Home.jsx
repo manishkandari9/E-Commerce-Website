@@ -2,12 +2,13 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import ExploreDestinations from './ExploreDestinations';
+import Featured from './Featured';
 
 function Button({ variant, className, children, ...props }) {
-  const baseStyle = "px-4 py-2 rounded text-lg font-semibold focus:outline-none";
+  const baseStyle = "px-4 py-2 rounded text-lg font-semibold focus:outline-none transition-all duration-300";
   const variants = {
-    outline: "border-2 border-white text-white hover:bg-white hover:text-black",
-    solid: "bg-blue-600 text-white hover:bg-blue-700",
+    outline: "border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white",
+    solid: "bg-green-500 text-white hover:bg-green-600 shadow-lg hover:shadow-xl",
   };
 
   return (
@@ -22,7 +23,7 @@ function Button({ variant, className, children, ...props }) {
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const carouselRef = useRef(null); // Reference to the carousel container
+  const carouselRef = useRef(null);
 
   const slides = [
     "/kun.jpg",
@@ -56,10 +57,9 @@ export default function HeroSection() {
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-    // Scroll to next slide
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: carouselRef.current.clientWidth, // Scroll by the width of one slide
+        left: carouselRef.current.clientWidth,
         behavior: 'smooth',
       });
     }
@@ -67,39 +67,39 @@ export default function HeroSection() {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    // Scroll to previous slide
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: -carouselRef.current.clientWidth, // Scroll by the width of one slide
+        left: -carouselRef.current.clientWidth,
         behavior: 'smooth',
       });
     }
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);  // Auto-slide every 5 seconds
-    return () => clearInterval(interval);  // Clear interval on component unmount
+    const interval = setInterval(nextSlide, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <>
-    <div className="relative min-h-screen w-full overflow-hidden">
-      <Navbar />
+      <div className="relative h-[580px] sm:h-[580px] md:h-[600px] lg:h-[850px] w-full overflow-hidden bg-gradient-to-r from-white via-gray-300 to-gray-400 dark:from-black dark:via-gray-800 dark:to-black">
 
-      {/* Background Image for Desktop */}
-      <div className="absolute inset-0 mt-[70px] hidden lg:block">
-        <img
-          src={slides[currentSlide]}
-          alt="Adventure background"
-          className="object-cover w-full h-full transition-opacity duration-500"
-          style={{ filter: "brightness(0.95)" }} // Adds a darkening filter to enhance text readability
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" /> {/* Adds a gradient overlay */}
-      </div>
+        <Navbar />
+    
+        {/* Background Image for Desktop */}
+        <div className="absolute inset-0 mt-[70px] hidden lg:block">
+          <img
+            src={slides[currentSlide]}
+            alt="Adventure background"
+            className="object-cover w-full h-full transition-opacity duration-500"
+            style={{ filter: "brightness(0.6) saturate(1.2)" }}
+          />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-blue-900/50 to-black/20" />
+        </div>
 
-      <div className="relative z-10 flex min-h-screen flex-col">
-        {/* Mobile and Tablet View */}
-        <div className="lg:hidden w-full mt-[90px] pb-8 relative">
+        <div className="relative z-10 flex h-full flex-col">
+          {/* Mobile and Tablet View */}
+          <div className="lg:hidden w-full mt-[12px] pb-4 relative">
           <div 
             ref={carouselRef} // Reference the carousel container here
             className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
@@ -110,13 +110,13 @@ export default function HeroSection() {
                 key={index}
                 className="flex-shrink-0 w-full snap-center px-4"
               >
-                <div className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg">
+                <div className="relative w-full h-[450px] rounded-xl overflow-hidden shadow-lg">
                   <img
                     src={slide}
                     alt={slideTexts[index].title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-blue-900/50 to-transparent" />
                   <div className="absolute bottom-0 w-full p-6">
                     <h2 className="text-white text-2xl font-bold mt-4 mb-2 font-serif">
                       {slideTexts[index].title}
@@ -155,34 +155,30 @@ export default function HeroSection() {
           </button>
         </div>
 
-        {/* Desktop View */}
-        <div className="hidden lg:flex relative z-10 flex-col md:flex-row">
-          {/* Left Content */}
-          <div className="w-full md:w-[45%] px-6 md:px-20 flex flex-col justify-center mt-[10vh] z-20 mt-48">
-            <h2 className="text-yellow-400 text-2xl font-semibold mb-2">
-              {slideTexts[currentSlide].subtitle}
-            </h2>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-serif">
-              {slideTexts[currentSlide].title}
-            </h1>
-            <p className="text-gray-200 mb-8 text-lg md:text-xl opacity-90">
-              {slideTexts[currentSlide].description}
-            </p>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center">
-                <span className="text-black">→</span>
-              </div>
-              <Button
-                variant="outline"
-                className="bg-transparent text-white border-white hover:bg-white hover:text-black transition-colors text-lg px-8"
-              >
-                START YOUR ADVENTURE
-              </Button>
-            </div>
-          </div>
 
-          {/* Right Content - Carousel */}
-          <div className="w-full md:w-[55%] flex items-center mt-48">
+          {/* Desktop View */}
+          <div className="hidden lg:flex relative z-10 h-full items-center px-20">
+            <div className="w-1/2 pr-12 mt-20">
+              <h2 className="text-orange-400 text-2xl font-semibold mb-2">
+                {slideTexts[currentSlide].subtitle}
+              </h2>
+              <h1 className="text-2xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                {slideTexts[currentSlide].title}
+              </h1>
+              <p className="text-gray-200 mb-6 text-lg md:text-xl opacity-95">
+                {slideTexts[currentSlide].description}
+              </p>
+              <div className="flex items-center gap-4">
+                <Button variant="solid">
+                  START YOUR ADVENTURE
+                </Button>
+                <Button variant="outline">
+                  LEARN MORE
+                </Button>
+              </div>
+            </div>
+            {/* Right Content - Carousel */}
+            <div className="w-full md:w-[55%] flex items-center mt-20">
             <div className="w-full">
               <div className="relative">
                 <div className="flex gap-4 mt-64">
@@ -203,7 +199,7 @@ export default function HeroSection() {
                         <img
                           src={slide}
                           alt={`Adventure slide ${index + 1}`}
-                          className="rounded-xl object-cover h-[250px] w-[200px]"
+                          className="rounded-xl object-cover h-[230px] w-[200px] shadow-2xl"
                         />
                       </div>
                     ))}
@@ -231,11 +227,13 @@ export default function HeroSection() {
                 </div>
               </div>
             </div>
+          </div>  
           </div>
         </div>
       </div>
-    </div>
-     <ExploreDestinations />
-     </>
+      <ExploreDestinations />
+      <Featured />
+    </>
   );
 }
+

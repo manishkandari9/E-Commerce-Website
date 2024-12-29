@@ -1,10 +1,12 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
 
 const Home = lazy(() => import('./pages/Home'));
 const Auth = lazy(() => import('./components/Auth/auth'));
 const ExploreDestinations = lazy(() => import('./pages/ExploreDestinations'));
+const Featured = lazy(() => import('./pages/Featured'))
+
+
 
 function App() {
   return (
