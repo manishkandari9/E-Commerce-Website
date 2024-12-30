@@ -1,24 +1,19 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-const Home = lazy(() => import('./pages/Home'));
-const Auth = lazy(() => import('./components/Auth/auth'));
-const ExploreDestinations = lazy(() => import('./pages/ExploreDestinations'));
-const Featured = lazy(() => import('./pages/Featured'))
-
-
-
+// Importing components directly
+import Home from './pages/Home';
+import Auth from './components/Auth/auth';
+import ExploreDestinations from './pages/ExploreDestinations';
 function App() {
   return (
     <Router>
       <div className="App">
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/explore" element={<ExploreDestinations />} />
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/explore" element={<ExploreDestinations />} />
+        </Routes>
       </div>
     </Router>
   );

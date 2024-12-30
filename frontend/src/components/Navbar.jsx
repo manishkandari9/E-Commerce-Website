@@ -6,6 +6,7 @@ import { X, Menu, User, Moon, Sun } from 'lucide-react';
 import * as THREE from 'three';
 import Cookies from 'js-cookie';
 import Auth from './Auth/auth';
+import NavbarSkeleton from '../Skelton/NavbarSkeleton';
 
 const AnimatedLogo = () => {
   const meshRef = useRef();
@@ -36,21 +37,22 @@ const NavItem = ({ href, children }) => {
 
   return (
     <motion.a
-      href={href}
-      className="relative px-3 py-2 rounded-md text-sm font-medium text-orange-400 dark:text-neutral-200 hover:text-green-400 transition-colors duration-200"
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      {children}
-      <motion.div
-        className="absolute bottom-0 left-0 w-full h-0.5 bg-secondary-500"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: isHovered ? 1 : 0 }}
-        transition={{ duration: 0.2 }}
-      />
-    </motion.a>
+    href={href}
+    className="relative px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-neutral-200 hover:text-blue-600 dark:hover:text-teal-500 transition-colors duration-200"
+    onHoverStart={() => setIsHovered(true)}
+    onHoverEnd={() => setIsHovered(false)}
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    {children}
+    <motion.div
+      className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 dark:bg-teal-500"
+      initial={{ scaleX: 0 }}
+      animate={{ scaleX: isHovered ? 1 : 0 }}
+      transition={{ duration: 0.2 }}
+    />
+  </motion.a>
+  
   );
 };
 
@@ -61,6 +63,7 @@ const Navbar = () => {
   const [userPhoto, setUserPhoto] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleLogin = () => {
@@ -87,6 +90,14 @@ const Navbar = () => {
     document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Destination', href: '/services' },
@@ -97,11 +108,15 @@ const Navbar = () => {
   ];
 
   return (
+    <>
+    {isLoading ? (
+      <NavbarSkeleton />
+    ) : (
     <motion.nav
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-gradient-to-r from-black via-gray-900 to-transparent dark:from-black dark:via-gray-800 dark:to-black shadow-lg"
+         className="bg-white dark:bg-gradient-to-r dark:from-black dark:via-gray-900 dark:to-black shadow-lg"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -154,13 +169,14 @@ const Navbar = () => {
                 </Canvas>
               </div>
               <motion.span
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-                className="font-bold text-white text-2xl tracking-wider font-['Mogra', 'system-ui'] !important"
-              >
-                ThrillTrek
-              </motion.span>
+  initial={{ opacity: 0, x: -20 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ delay: 0.2, duration: 0.5 }}
+  className="font-bold text-2xl tracking-wider font-['Mogra', 'system-ui'] !important text-black dark:text-white"
+>
+  ThrillTrek
+</motion.span>
+
             </motion.a>
           </div>
 
@@ -178,7 +194,7 @@ const Navbar = () => {
               ))}
             </AnimatePresence>
 
-            <div className="relative">
+             <div className="relative flex items-center space-x-4">
               {isLoggedIn ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.5 }}
@@ -346,7 +362,10 @@ const Navbar = () => {
         )}
       </AnimatePresence>
     </motion.nav>
+    )}
+    </>
   );
 };
 
 export default Navbar;
+

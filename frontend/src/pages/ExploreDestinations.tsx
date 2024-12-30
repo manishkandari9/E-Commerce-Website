@@ -245,7 +245,7 @@ export default function ExploreDestinations() {
     }, 1000);
   };
 
-  const sectionBg = 'bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800';
+  const sectionBg = 'bg-white dark:bg-gradient-to-r dark:from-black dark:via-gray-900 dark:to-black';
   const headingColor = 'text-gray-900 dark:text-gray-100';
 
   return (

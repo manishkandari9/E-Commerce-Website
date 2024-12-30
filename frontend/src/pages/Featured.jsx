@@ -33,9 +33,9 @@ export default function Featured() {
   const [activeExperience, setActiveExperience] = useState(0);
 
   return (
-    <section className="py-20 bg-gray-100">
+    <section className="py-20 bg-gray-100 dark:bg-gradient-to-r dark:from-black dark:via-gray-900 dark:to-black">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12">Featured Experiences</h2>
+        <h2 className="text-4xl font-bold text-center mb-12 text-black dark:text-white">Featured Experiences</h2>
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="lg:w-1/2">
             <div className="relative h-[600px] overflow-hidden rounded-xl shadow-2xl">
@@ -62,20 +62,20 @@ export default function Featured() {
             </div>
           </div>
           <div className="lg:w-1/2">
-            <div className="bg-white rounded-xl shadow-xl p-8">
-              <h3 className="text-2xl font-semibold mb-6">Choose Your Adventure</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8">
+              <h3 className="text-2xl font-semibold mb-6 text-black dark:text-white">Choose Your Adventure</h3>
               {experiences.map((exp, index) => (
                 <motion.div
                   key={index}
                   className={`p-4 rounded-lg cursor-pointer mb-4 transition-colors ${
-                    index === activeExperience ? 'bg-gray-100' : 'hover:bg-gray-50'
+                    index === activeExperience ? 'bg-gray-100 dark:bg-gray-700' : 'hover:bg-gray-50 dark:hover:bg-gray-600'
                   }`}
                   onClick={() => setActiveExperience(index)}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xl font-medium">{exp.title}</h4>
+                    <h4 className="text-xl font-medium text-black dark:text-white">{exp.title}</h4>
                     <ChevronRight className={`w-6 h-6 transition-transform ${
                       index === activeExperience ? 'transform rotate-90' : ''
                     }`} />
@@ -86,7 +86,7 @@ export default function Featured() {
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="mt-2 text-gray-600"
+                      className="mt-2 text-gray-600 dark:text-gray-300"
                     >
                       {exp.description}
                     </motion.p>
@@ -107,4 +107,3 @@ export default function Featured() {
     </section>
   );
 }
-
