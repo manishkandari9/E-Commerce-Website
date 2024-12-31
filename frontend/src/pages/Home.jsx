@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import ExploreDestinations from './ExploreDestinations';
 import Featured from './Featured';
+import SkeletonLoader, { SkeletonText, SkeletonTitle, SkeletonButton, SkeletonImage } from '../Skelton/SkeletonLoader';
 
 function Button({ variant, className, children, ...props }) {
   const baseStyle = "px-4 py-2 rounded text-lg font-semibold focus:outline-none transition-all duration-300";
@@ -21,28 +22,13 @@ function Button({ variant, className, children, ...props }) {
   );
 }
 
-function SkeletonLoader({ className, style }) {
-  return (
-    <div
-      className={`animate-pulse rounded-lg 
-        bg-gradient-to-r from-gray-800 via-gray-900 to-black 
-        dark:from-black dark:via-gray-800 dark:to-gray-900 
-        shadow-md dark:shadow-gray-800/50 
-        ${className}`}
-      style={{
-        ...style,
-        animation: "pulse 2s infinite ease-in-out",
-        boxShadow: "0 0 15px 3px rgba(255, 255, 255, 0.1)",
-      }}
-    />
-  );
-}
-
-
+const openSlide = (index) => {
+  console.log(`Opening page for slide ${index + 1}`);
+};
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [loading, setLoading] = useState(true); // Loading state for the skeleton loaders
+  const [isLoading, setIsLoading] = useState(true);
   const carouselRef = useRef(null);
 
   const slides = [
@@ -101,37 +87,28 @@ export default function HeroSection() {
   }, []);
 
   useEffect(() => {
-    // Simulate image loading to show skeleton loader
-    const img = new Image();
-    img.src = slides[currentSlide];
-    img.onload = () => setLoading(false);
-  }, [currentSlide]);
-
-  useEffect(() => {
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
-  
-      return () => clearTimeout(timer);
-    }, []);
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
-      <div className="relative h-[580px] sm:h-[580px] md:h-[600px] lg:h-[850px] w-full overflow-hidden bg-gradient-to-r from-white via-gray-300 to-gray-400 dark:from-black dark:via-gray-800 dark:to-black">
+      <div className="relative h-[580px] sm:h-[580px] md:h-[600px] lg:h-[740px] w-full overflow-hidden bg-gradient-to-r from-white via-gray-300 to-gray-400 dark:from-black dark:via-gray-800 dark:to-black">
         <Navbar />
     
-        {/* Background Image with Skeleton Loader for Desktop */}
-        <div className="absolute inset-0 mt-[70px] hidden lg:block">
-          {loading ? (
-            <SkeletonLoader className="w-full h-full" />
-          ) : (
+        {/* Background Image with Skeleton Loader */}
+        <div className="absolute inset-0 mt-[70px]">
+          <div className={`w-full h-full transition-opacity duration-500 ${isLoading ? 'opacity-100' : 'opacity-0'}`}>
+            <SkeletonImage className="w-full h-full" />
+          </div>
+          <div className={`absolute inset-0 transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
             <img
               src={slides[currentSlide]}
               alt="Adventure background"
-              className="object-cover w-full h-full transition-opacity duration-500"
+              className="object-cover w-full h-full"
               style={{ filter: "brightness(0.6) saturate(1.2)" }}
             />
-          )}
+          </div>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-blue-900/50 to-black/20" />
         </div>
 
@@ -139,44 +116,66 @@ export default function HeroSection() {
           {/* Mobile and Tablet View */}
           <div className="lg:hidden w-full mt-[12px] pb-4 relative">
             <div 
-              ref={carouselRef} // Reference the carousel container here
+              ref={carouselRef}
               className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
               style={{ scrollSnapType: 'x mandatory' }}
-            >
+            > 
               {slides.map((slide, index) => (
                 <div 
                   key={index}
                   className="flex-shrink-0 w-full snap-center px-4"
                 >
                   <div className="relative w-full h-[450px] rounded-xl overflow-hidden shadow-lg">
-                    {loading ? (
-                      <SkeletonLoader className="w-full h-full rounded-xl" />
-                    ) : (
+                    <div className={`w-full h-full transition-opacity duration-500 ${isLoading ? 'opacity-100' : 'opacity-0'}`}>
+                      <SkeletonImage className="w-full h-full rounded-xl" />
+                    </div>
+                    <div className={`absolute inset-0 transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
                       <img
                         src={slide}
                         alt={slideTexts[index].title}
                         className="w-full h-full object-cover"
                       />
-                    )}
+                    </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-blue-900/50 to-transparent" />
                     <div className="absolute bottom-0 w-full p-6">
                       <h2 className="text-white text-2xl font-bold mt-4 mb-2 font-serif">
-                        {loading ? <SkeletonLoader className="h-6 w-2/3" /> : slideTexts[index].title}
+                        {isLoading ? (
+                          <SkeletonTitle className="w-3/4" />
+                        ) : (
+                          <span className="animate-fade-in">{slideTexts[index].title}</span>
+                        )}
                       </h2>
                       <h3 className="text-yellow-400 text-xl font-semibold mt-2 mb-2">
-                        {loading ? <SkeletonLoader className="h-5 w-1/3" /> : slideTexts[index].subtitle}
+                        {isLoading ? (
+                          <SkeletonTitle className="w-1/2" />
+                        ) : (
+                          <span className="animate-fade-in">{slideTexts[index].subtitle}</span>
+                        )}
                       </h3>
                       <div className="relative">
-                        <p className="text-white/90 text-sm mb-2 mt-2 line-clamp-4 pr-14">
-                          {loading ? <SkeletonLoader className="h-10 w-full" /> : slideTexts[index].description}
-                        </p>
-                        {!loading && (
-                          <button
-                            onClick={nextSlide}
-                            className="absolute right-1 bottom-6 top-12 w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center hover:bg-yellow-500 transition-all duration-300"> 
-                            <ChevronRight className="h-5 w-5 text-black"/>
-                          </button>
+                        {isLoading ? (
+                          <div className="text-white/90 text-sm mb-2 mt-2 line-clamp-4 pr-14">
+                            <SkeletonText className="w-full mb-1" />
+                            <SkeletonText className="w-5/6 mb-1" />
+                            <SkeletonText className="w-4/5" />
+                          </div>
+                        ) : (
+                          <p className="text-white/90 text-sm mb-2 mt-2 line-clamp-4 pr-14">
+                            <span className="animate-fade-in">{slideTexts[index].description}</span>
+                          </p>
                         )}
+                        <div className="absolute right-0 bottom-0">
+                          {isLoading ? (
+                            <SkeletonLoader className="w-10 h-10 rounded-full" />
+                          ) : (
+                            <button
+                              onClick={() => openSlide(index)}
+                              className="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center hover:bg-yellow-500 transition-all duration-300 animate-fade-in"
+                            >
+                              <ChevronRight className="h-5 w-5 text-black" />
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -185,42 +184,53 @@ export default function HeroSection() {
             </div>
 
             {/* Navigation Arrows for Mobile */}
-            <button
-              onClick={prevSlide}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/50 flex items-center justify-center"
-            >
-              {loading ? <SkeletonLoader className="w-6 h-6 rounded-full" /> : <ChevronLeft className="h-6 w-6 text-black" />}
-            </button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/50 flex items-center justify-center"
-            >
-              {loading ? <SkeletonLoader className="w-6 h-6 rounded-full" /> : <ChevronRight className="h-6 w-6 text-black" />}
-            </button>
+            <div className="absolute left-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/50 flex items-center justify-center">
+              {isLoading ? (
+                <SkeletonLoader className="w-6 h-6 rounded-full" />
+              ) : (
+                <button onClick={prevSlide} className="w-full h-full flex items-center justify-center">
+                  <ChevronLeft className="h-6 w-6 text-black animate-fade-in" />
+                </button>
+              )}
+            </div>
+            <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/50 flex items-center justify-center">
+              {isLoading ? (
+                <SkeletonLoader className="w-6 h-6 rounded-full" />
+              ) : (
+                <button onClick={nextSlide} className="w-full h-full flex items-center justify-center">
+                  <ChevronRight className="h-6 w-6 text-black animate-fade-in" />
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Desktop View */}
-          <div className="hidden lg:flex relative z-10 h-full items-center px-20">
+          <div className="hidden lg:flex relative z-10 h-full items-center pl-20">
             <div className="w-1/2 pr-12 mt-20">
-              {loading ? (
+              {isLoading ? (
                 <>
-                  <SkeletonLoader className="h-8 w-1/2 mb-2" />
-                  <SkeletonLoader className="h-12 w-3/4 mb-4" />
-                  <SkeletonLoader className="h-6 w-2/3 mb-6" />
-                  <SkeletonLoader className="h-10 w-1/3" />
+                  <SkeletonTitle className="w-1/2 mb-2" />
+                  <SkeletonTitle className="w-3/4 mb-4" />
+                  <SkeletonText className="w-2/3 mb-2" />
+                  <SkeletonText className="w-3/5 mb-2" />
+                  <SkeletonText className="w-4/5 mb-6" />
+                  <div className="flex items-center gap-4">
+                    <SkeletonButton className="w-48" />
+                    <SkeletonButton className="w-40" />
+                  </div>
                 </>
               ) : (
                 <>
-                  <h2 className="text-orange-400 text-2xl font-semibold mb-2">
+                  <h2 className="text-orange-400 text-2xl font-semibold mb-2 animate-fade-in">
                     {slideTexts[currentSlide].subtitle}
                   </h2>
-                  <h1 className="text-2xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                  <h1 className="text-2xl md:text-6xl font-bold text-white mb-6 leading-tight animate-fade-in">
                     {slideTexts[currentSlide].title}
                   </h1>
-                  <p className="text-gray-200 mb-6 text-lg md:text-xl opacity-95">
+                  <p className="text-gray-200 mb-6 text-lg md:text-xl opacity-95 animate-fade-in">
                     {slideTexts[currentSlide].description}
                   </p>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4 animate-fade-in">
                     <Button variant="solid">
                       START YOUR ADVENTURE
                     </Button>
@@ -232,17 +242,17 @@ export default function HeroSection() {
               )}
             </div>
             {/* Right Content - Carousel */}
-            <div className="w-full md:w-[55%] flex items-center mt-20">
+            <div className="w-full md:w-[54%] flex items-center mt-36">
               <div className="w-full">
                 <div className="relative">
-                  <div className="flex gap-4 mt-64">
+                  <div className="flex gap-4 mt-32">
                     <div className="overflow-hidden flex gap-4 relative w-[840px] h-[250px]">
                       {slides.map((slide, index) => (
                         <div
                           key={index}
                           className={`transition-all duration-500 ease-in-out absolute ${
                             index === currentSlide
-                              ? 'z-20 left-0 scale-105'
+                              ? 'z-20 left-0 scale-100'
                               : index === (currentSlide + 1) % slides.length
                               ? 'z-10 left-[210px]'
                               : index === (currentSlide + 2) % slides.length
@@ -250,57 +260,61 @@ export default function HeroSection() {
                               : 'z-30 left-[630px] scale-95 opacity-50'
                           }`}
                         >
-                          {loading ? (
-                            <SkeletonLoader className="rounded-xl h-[230px] w-[200px]" />
-                          ) : (
+                          <div className={`w-full h-full transition-opacity duration-500 ${isLoading ? 'opacity-100' : 'opacity-0'}`}>
+                            <SkeletonImage className="rounded-3xl h-[230px] w-[200px]" />
+                          </div>
+                          <div className={`absolute inset-0 transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
                             <img
                               src={slide}
                               alt={`Adventure slide ${index + 1}`}
-                              className="rounded-xl object-cover h-[230px] w-[200px] shadow-2xl"
+                              className="rounded-3xl object-cover h-[215px] w-[185px] shadow-2xl animate-fade-in"
                             />
-                          )}
+                          </div>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Navigation Arrows */}
                   {/* Navigation Arrows and Number */}
-<div className="flex items-center gap-8 mt-6">
-  {loading ? (
-    <>
-      <SkeletonLoader className="w-12 h-12 rounded-full" />
-      <SkeletonLoader className="w-12 h-12 rounded-full" />
-    </>
-  ) : (
-    <>
-      <button
-        onClick={prevSlide}
-        className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
-      >
-        <ChevronLeft className="h-6 w-6" />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
-      >
-        <ChevronRight className="h-6 w-6" />
-      </button>
-    </>
-  )}
+                  <div className="flex items-center gap-8">
+                    <div className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center">
+                      {isLoading ? (
+                        <SkeletonLoader className="w-6 h-6 rounded-full" />
+                      ) : (
+                        <button
+                          onClick={prevSlide}
+                          className="w-full h-full flex items-center justify-center text-white hover:bg-white/10 transition-colors animate-fade-in"
+                        >
+                          <ChevronLeft className="h-6 w-6" />
+                        </button>
+                      )}
+                    </div>
+                    <div className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center">
+                      {isLoading ? (
+                        <SkeletonLoader className="w-6 h-6 rounded-full" />
+                      ) : (
+                        <button
+                          onClick={nextSlide}
+                          className="w-full h-full flex items-center justify-center text-white hover:bg-white/10 transition-colors animate-fade-in"
+                        >
+                          <ChevronRight className="h-6 w-6" />
+                        </button>
+                      )}
+                    </div>
 
-  <div className="border-t-2 border-white/30 w-96" />
-  
-  {/* Navigation Number */}
-  {loading ? (
-    <SkeletonLoader className="h-12 w-16 rounded-lg bg-white/30 dark:bg-gray-700" />
-  ) : (
-    <div className="text-6xl font-bold text-white dark:text-gray-200">
-      0{currentSlide + 1}
-    </div>
-  )}
-</div>
+                    <div className="border-t-2 border-white/30 w-96" />
 
+                    {/* Navigation Number */}
+                    <div className="h-16 w-20 flex items-center justify-center rounded-full">
+                      {isLoading ? (
+                        <SkeletonLoader className="h-16 w-20 rounded-full" />
+                      ) : (
+                        <div className="text-6xl font-bold text-white dark:text-gray-200 animate-fade-in">
+                          0{currentSlide + 1}
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>  

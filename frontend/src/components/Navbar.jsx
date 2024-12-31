@@ -99,7 +99,7 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '/' },
+    { name: 'Home', href: '/Home' },
     { name: 'Destination', href: '/services' },
     { name: 'Packages', href: '/about' },
     { name: 'Explore', href: '/contact' },
@@ -179,7 +179,6 @@ const Navbar = () => {
 
             </motion.a>
           </div>
-
           <motion.div
             className="hidden md:flex md:items-center md:space-x-1"
             initial={{ opacity: 0 }}
@@ -193,7 +192,6 @@ const Navbar = () => {
                 </NavItem>
               ))}
             </AnimatePresence>
-
              <div className="relative flex items-center space-x-4">
               {isLoggedIn ? (
                 <motion.div
@@ -229,7 +227,6 @@ const Navbar = () => {
                 </motion.button>
               )}
             </div>
-
             <motion.button
               whileHover={{ scale: 1.1, rotate: 180 }}
               whileTap={{ scale: 0.9 }}
