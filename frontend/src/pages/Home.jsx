@@ -93,7 +93,7 @@ export default function HeroSection() {
 
   return (
     <>
-      <div className="relative h-[580px] sm:h-[580px] md:h-[600px] lg:h-[740px] w-full overflow-hidden bg-gradient-to-r from-white via-gray-300 to-gray-400 dark:from-black dark:via-gray-800 dark:to-black">
+      <div className="relative h-[580px] sm:h-[580px] md:h-[600px] lg:h-[750px] w-full overflow-hidden bg-gradient-to-r from-white via-gray-300 to-gray-400 dark:from-black dark:via-gray-800 dark:to-black">
         <Navbar />
     
         {/* Background Image with Skeleton Loader */}
@@ -242,38 +242,51 @@ export default function HeroSection() {
               )}
             </div>
             {/* Right Content - Carousel */}
-            <div className="w-full md:w-[54%] flex items-center mt-36">
+            <div className="w-full md:w-[54%] flex items-center mt-44">
               <div className="w-full">
                 <div className="relative">
-                  <div className="flex gap-4 mt-32">
-                    <div className="overflow-hidden flex gap-4 relative w-[840px] h-[250px]">
+                <div className="flex mt-32 relative">
+                <div className="overflow-hidden flex gap-[8px] relative w-[840px] h-[220px] mb-4">
                       {slides.map((slide, index) => (
                         <div
-                          key={index}
-                          className={`transition-all duration-500 ease-in-out absolute ${
-                            index === currentSlide
-                              ? 'z-20 left-0 scale-100'
-                              : index === (currentSlide + 1) % slides.length
-                              ? 'z-10 left-[210px]'
-                              : index === (currentSlide + 2) % slides.length
-                              ? 'z-0 left-[420px]'
-                              : 'z-30 left-[630px] scale-95 opacity-50'
-                          }`}
+                         key={index}
+                         className={`transition-all duration-500 ease-in-out absolute ${
+                          index === currentSlide
+                          ? 'z-20 left-0 scale-100'
+                          : index === (currentSlide + 1) % slides.length
+                          ? 'z-10 left-[168px]'
+                          : index === (currentSlide + 2) % slides.length
+                          ? 'z-0 left-[336px]'
+                          : 'z-30 left-[504px] scale-95 opacity-50'
+                        }`}
+                        > 
+                        <div
+                        className={`w-full h-full transition-opacity duration-500 ${
+                    
+                        isLoading ? 'opacity-100' : 'opacity-0'
+                        }`}                    
                         >
-                          <div className={`w-full h-full transition-opacity duration-500 ${isLoading ? 'opacity-100' : 'opacity-0'}`}>
-                            <SkeletonImage className="rounded-3xl h-[230px] w-[200px]" />
-                          </div>
-                          <div className={`absolute inset-0 transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-                            <img
-                              src={slide}
-                              alt={`Adventure slide ${index + 1}`}
-                              className="rounded-3xl object-cover h-[215px] w-[185px] shadow-2xl animate-fade-in"
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                   <SkeletonImage className="rounded-3xl h-[180px] w-[160px]" />
+                </div>
+                
+                 <div
+                 className={`absolute inset-0 transition-opacity duration-500 ${                  
+                  isLoading ? 'opacity-0' : 'opacity-100'                
+                }`}                
+                >
+                  
+                  <img                  
+                  src={slide}                  
+                  alt={`Adventure slide ${index + 1}`}                    
+                  className="rounded-xl object-cover h-[180px] w-[160px] shadow-md transition-transform transform hover:scale-105 hover:shadow-2xl duration-300 ease-in-out mt-8 border border-gray-200"
+                  
+                  />
                   </div>
+                </div>              
+              ))}
+              </div>
+              </div>
+
 
                   {/* Navigation Arrows and Number */}
                   <div className="flex items-center gap-8">
