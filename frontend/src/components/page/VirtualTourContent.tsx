@@ -15,7 +15,7 @@ export const VirtualTourContent: React.FC<VirtualTourContentProps> = ({ destinat
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);

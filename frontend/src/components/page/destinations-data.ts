@@ -32,7 +32,7 @@ export const destinations: Destination[] = [
     id: "dest-61",
     name: "Destination A",
     description: "Experience the beauty of Destination A.",
-    image: "/placeholder.svg?height=400&width=600&text=Destination A",
+    image: "/dha.jpg",
     details: {
       duration: "3-4 days",
       bestTime: "Summer",
@@ -45,7 +45,7 @@ export const destinations: Destination[] = [
     id: "dest-62",
     name: "Destination B",
     description: "Explore the wonders of Destination B.",
-    image: "/placeholder.svg?height=400&width=600&text=Destination B",
+    image: "/kun.jpg",
     details: {
       duration: "2-5 days",
       bestTime: "Autumn",
@@ -58,7 +58,7 @@ export const destinations: Destination[] = [
     id: "dest-63",
     name: "Destination C",
     description: "Discover the hidden gems of Destination C.",
-    image: "/placeholder.svg?height=400&width=600&text=Destination C",
+    image: "/dev.jpg",
     details: {
       duration: "5-7 days",
       bestTime: "Winter",

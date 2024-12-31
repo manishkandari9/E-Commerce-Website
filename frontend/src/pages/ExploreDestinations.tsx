@@ -28,7 +28,7 @@ const ExploreDestinations: React.FC = () => {
         newDestinations[randomIndex] = destinations[replacementIndex]
         return newDestinations
       })
-    }, 10000) // Change a random destination every 10 seconds
+    }, 1000) // Change a random destination every 10 seconds
 
     return () => clearInterval(interval)
   }, [])
