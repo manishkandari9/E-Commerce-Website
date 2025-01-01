@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import ExploreDestinations from './ExploreDestinations';
 import Featured from './Featured';
+import AttractionsPage from './attractions-page';
 import SkeletonLoader, { SkeletonText, SkeletonTitle, SkeletonButton, SkeletonImage } from '../Skelton/SkeletonLoader';
 
 function Button({ variant, className, children, ...props }) {
@@ -336,6 +337,7 @@ export default function HeroSection() {
       </div>
       <ExploreDestinations />
       <Featured />
+      <AttractionsPage/>
     </>
   );
 }

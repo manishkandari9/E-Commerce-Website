@@ -5,11 +5,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Auth from './components/Auth/auth';
 import ExploreDestinations from './pages/ExploreDestinations';
-import { VirtualTourContent } from './components/page/VirtualTourContent';
-import { DestinationCard } from './components/page/DestinationCard';
-import { DynamicPricing } from './components/page/DynamicPricing';
-import { FeatureDialog } from './components/page/FeatureDialog';
 import SkeletonCard from './Skelton/SkeletonCard';
+import AttractionsPage from './pages/attractions-page';
+import AttractionsSkeleton from './Skelton/attractions-skeleton';
 function App() {
   return (
     <Router>
@@ -18,12 +16,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/explore" element={<ExploreDestinations />} />
-          <Route path="/card" element={<DestinationCard />} />
-          <Route path="/pricing" element={<DynamicPricing />} />
-          <Route path="/dialog" element={<FeatureDialog />} />
-          <Route path="/tour" element={<VirtualTourContent />} />
-          <Route path="/destinations" element={<destinations />} />
           <Route path="/skeleton" element={<SkeletonCard />} />
+          <Route path="/attractions" element={<AttractionsPage />} />          
+          <Route path="/attractions-skeleton" element={<AttractionsSkeleton />} />
 
         </Routes>
       </div>
