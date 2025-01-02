@@ -8,6 +8,8 @@ import ExploreDestinations from './pages/ExploreDestinations';
 import SkeletonCard from './Skelton/SkeletonCard';
 import AttractionsPage from './pages/attractions-page';
 import AttractionsSkeleton from './Skelton/attractions-skeleton';
+import TourismGallery from './pages/TourismGallery';
+import SkeletonGalleryLoader from './Skelton/SkeletonGalleryLoader';
 function App() {
   return (
     <Router>
@@ -18,7 +20,9 @@ function App() {
           <Route path="/explore" element={<ExploreDestinations />} />
           <Route path="/skeleton" element={<SkeletonCard />} />
           <Route path="/attractions" element={<AttractionsPage />} />          
-          <Route path="/attractions-skeleton" element={<AttractionsSkeleton />} />
+          <Route path="/attractions-skeleton" element={<AttractionsSkeleton />} />  
+          <Route path="/gallery" element={<TourismGallery />} />
+          <Route path="/skeleton-gallery-loader" element={<SkeletonGalleryLoader />} />
 
         </Routes>
       </div>
