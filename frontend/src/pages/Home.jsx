@@ -5,6 +5,8 @@ import ExploreDestinations from './ExploreDestinations';
 import Featured from './Featured';
 import AttractionsPage from './attractions-page';
 import TourismGallery from './TourismGallery';
+import { TourismSection } from './TourismSection';
+import ContactForm from './contact-form';
 import SkeletonLoader, { SkeletonText, SkeletonTitle, SkeletonButton, SkeletonImage } from '../Skelton/SkeletonLoader';
 
 function Button({ variant, className, children, ...props }) {
@@ -340,6 +342,8 @@ export default function HeroSection() {
       <Featured />
       <AttractionsPage/>
       <TourismGallery/>
+      <TourismSection/>
+      <ContactForm/>
     </>
   );
 }

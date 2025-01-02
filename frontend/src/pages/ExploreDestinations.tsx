@@ -6,7 +6,7 @@ const destinations = [
   {
     name: "Taj Mahal, Agra",
     description: "Marvel at the iconic symbol of love, a UNESCO World Heritage site and one of the New Seven Wonders of the World.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/kun.jpg",
     details: {
       duration: "1-2 days",
       bestTime: "October to March",
@@ -18,7 +18,7 @@ const destinations = [
   {
     name: "Varanasi Ghats",
     description: "Experience the spiritual heart of India with ancient rituals and mesmerizing Ganga Aarti on the banks of the holy Ganges.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/dha.png",
     details: {
       duration: "2-3 days",
       bestTime: "November to February",
@@ -30,7 +30,7 @@ const destinations = [
   {
     name: "Jaipur Pink City",
     description: "Explore the majestic forts and palaces of Rajasthan's capital, known for its distinctive pink architecture.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/dev.jpg",
     details: {
       duration: "3-4 days",
       bestTime: "November to February",
@@ -42,7 +42,7 @@ const destinations = [
   {
     name: "Kerala Backwaters",
     description: "Cruise through serene waterways, lush paddy fields, and experience the unique culture of God's Own Country.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/kun.jpg",
     details: {
       duration: "2-3 days",
       bestTime: "September to March",
@@ -54,7 +54,7 @@ const destinations = [
   {
     name: "Ladakh Himalayan Retreat",
     description: "Discover breathtaking landscapes, ancient monasteries, and the unique Tibetan-influenced culture of this high-altitude desert.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/dha.png",
     details: {
       duration: "7-10 days",
       bestTime: "June to September",
@@ -66,7 +66,7 @@ const destinations = [
   {
     name: "Goa Beaches",
     description: "Relax on golden beaches, indulge in water sports, and experience the vibrant nightlife of India's favorite coastal destination.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/dha.png",
     details: {
       duration: "4-5 days",
       bestTime: "November to February",
