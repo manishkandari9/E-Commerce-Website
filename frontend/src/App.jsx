@@ -12,6 +12,9 @@ import TourismGallery from './pages/TourismGallery';
 import SkeletonGalleryLoader from './Skelton/SkeletonGalleryLoader';
 import { TourismSection } from './pages/TourismSection';
 import { TourismSkeleton } from './Skelton/TourismSkeleton';
+import ContactPage from './pages/contact-page';
+import { ContactSkeleton } from './Skelton/contact-skeleton';
+import InteractiveGlobeSection from './pages/interactive-globe-section';
 function App() {
   return (
     <Router>
@@ -27,7 +30,9 @@ function App() {
           <Route path="/skeleton-gallery-loader" element={<SkeletonGalleryLoader />} />
           <Route path="/tourism" element={<TourismSection />} />
           <Route path="/tourism-skeleton" element={<TourismSkeleton />} />
-
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/contact-skeleton" element={<ContactSkeleton />} />
+          <Route path="/globe" element={<InteractiveGlobeSection />} />
         </Routes>
       </div>
     </Router>

@@ -105,6 +105,7 @@ const Navbar = () => {
     { name: 'Explore', href: '/contact' },
     { name: 'Booking', href: '/Booking' },
     { name: 'About Us', href: '/About Us' },
+    
   ];
 
   return (

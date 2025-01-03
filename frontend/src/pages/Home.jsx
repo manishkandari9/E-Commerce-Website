@@ -6,7 +6,8 @@ import Featured from './Featured';
 import AttractionsPage from './attractions-page';
 import TourismGallery from './TourismGallery';
 import { TourismSection } from './TourismSection';
-import ContactForm from './contact-form';
+import ContactPage from './contact-page';
+import InteractiveGlobeSection from './interactive-globe-section';
 import SkeletonLoader, { SkeletonText, SkeletonTitle, SkeletonButton, SkeletonImage } from '../Skelton/SkeletonLoader';
 
 function Button({ variant, className, children, ...props }) {
@@ -343,7 +344,9 @@ export default function HeroSection() {
       <AttractionsPage/>
       <TourismGallery/>
       <TourismSection/>
-      <ContactForm/>
+      <InteractiveGlobeSection/>
+      <ContactPage/>
+   
     </>
   );
 }

@@ -5,12 +5,14 @@ import Masonry from 'react-masonry-css'
 import { useTheme } from 'next-themes'
 import SkeletonGalleryLoader from '../Skelton/SkeletonGalleryLoader'
 
-const breakpointColumns = {
+// Move breakpointColumns outside the component
+const breakpointColumnsObj = {
   default: 4,
   1100: 3,
   700: 2,
   500: 1
 }
+
 const GalleryItem = ({ item }) => (
   <div className="break-inside-avoid mb-8 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
     {item.type === 'image' ? (
@@ -35,7 +37,6 @@ const GalleryItem = ({ item }) => (
     </div>
   </div>
 )
-
 export default function TourismGallery() {
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
@@ -73,7 +74,7 @@ export default function TourismGallery() {
           <SkeletonGalleryLoader />
         ) : (
           <Masonry
-            breakpointColumns={breakpointColumns}
+            breakpointCols={breakpointColumnsObj}
             className="flex w-auto -ml-4"
             columnClassName="pl-4 bg-clip-padding"
           >
