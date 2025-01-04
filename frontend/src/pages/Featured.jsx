@@ -6,13 +6,13 @@ const experiences = [
   {
     title: "Himalayan Peaks Expedition",
     description: "Scale the majestic heights of the Himalayas with our expert guides. Experience breathtaking views and the thrill of conquering some of the world's highest peaks.",
-    image: "/himalayan-peaks.jpg",
+    image: "/aarti .jpg",
     color: "from-blue-500 to-indigo-600",
   },
   {
     title: "Sacred Ganges River Cruise",
     description: "Embark on a spiritual journey along the holy Ganges River. Witness ancient rituals, visit historic temples, and immerse yourself in India's rich cultural heritage.",
-    image: "/ganges-cruise.jpg",
+    image: "/Bungee.jpg",
     color: "from-orange-400 to-pink-500",
   },
   {
@@ -24,7 +24,7 @@ const experiences = [
   {
     title: "Rajasthan Desert Camel Trek",
     description: "Journey through the golden sands of Rajasthan on a traditional camel trek. Experience the romance of desert nights and the hospitality of local communities.",
-    image: "/desert-trek.jpg",
+    image: "/dha.png",
     color: "from-yellow-400 to-amber-500",
   },
 ];

@@ -109,7 +109,7 @@ export default function ContactPage() {
           {/* Map */}
           <div className="rounded-2xl overflow-hidden shadow-lg h-[300px] relative border border-border/50 dark:border-gray-700">
             <img
-              src="/placeholder.svg"
+              src="/dha.png"
               alt="Location Map"
               className="object-cover w-full h-full"
             />

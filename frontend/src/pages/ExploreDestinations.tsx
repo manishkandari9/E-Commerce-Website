@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, MapPin, Calendar, Users, DollarSign, Star } from 'lucide-react';
-
+import RatingPage from './RatingPage';
+import RatingSystem from './RatingSystem';
 const destinations = [
   {
     name: "Taj Mahal, Agra",
@@ -101,6 +102,7 @@ const cardVariants = {
 
 function DestinationCard({ destination }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isRatingPageOpen, setIsRatingPageOpen] = useState(false);
 
   return (
     <motion.div
@@ -128,10 +130,13 @@ function DestinationCard({ destination }) {
             <DollarSign className="w-5 h-5 text-green-500 mr-1" />
             <span className="font-semibold text-gray-800 dark:text-gray-200">{destination.price}</span>
           </div>
-          <div className="flex items-center">
-            <Star className="w-5 h-5 text-yellow-400 mr-1" />
-            <span className="font-semibold text-gray-800 dark:text-gray-200">{destination.rating}</span>
-          </div>
+          <button 
+            onClick={() => setIsRatingPageOpen(true)}
+            className="flex items-center bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded-full transition duration-200"
+          >
+            <Star className="w-5 h-5 mr-1" />
+            <span>{destination.rating}</span>
+          </button>
         </div>
         <AnimatePresence>
           {isExpanded && (
@@ -157,14 +162,30 @@ function DestinationCard({ destination }) {
             </motion.div>
           )}
         </AnimatePresence>
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="w-full mt-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors duration-200 flex items-center justify-center"
-        >
-          <span>{isExpanded ? 'Less Info' : 'More Info'}</span>
-          <ChevronRight className={`ml-2 h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`} />
-        </button>
+        <div className="flex flex-col sm:flex-row gap-2 mt-2">
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="flex-1 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors duration-200 flex items-center justify-center"
+          >
+            <span>{isExpanded ? 'Less Info' : 'More Info'}</span>
+            <ChevronRight className={`ml-2 h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`} />
+          </button>
+          <button
+            onClick={() => alert(`Booking for ${destination.name}`)}
+            className="flex-1 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md transition-colors duration-200 flex items-center justify-center"
+          >
+            <span>Book Now</span>
+          </button>
+        </div>
       </div>
+      <AnimatePresence>
+        {isRatingPageOpen && (
+          <RatingPage
+            destination={destination}
+            onClose={() => setIsRatingPageOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
@@ -178,9 +199,12 @@ function SkeletonCard() {
         <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2 mb-4"></div>
         <div className="flex justify-between items-center mb-4">
           <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded w-16"></div>
-          <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded w-16"></div>
+          <div className="h-8 w-16 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
         </div>
-        <div className="h-10 bg-gray-300 dark:bg-gray-700 rounded w-full mt-2"></div>
+        <div className="flex flex-col sm:flex-row gap-2 mt-2">
+          <div className="flex-1 h-10 bg-gray-300 dark:bg-gray-700 rounded"></div>
+          <div className="flex-1 h-10 bg-gray-300 dark:bg-gray-700 rounded"></div>
+        </div>
       </div>
     </div>
   );

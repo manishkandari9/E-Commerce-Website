@@ -67,7 +67,7 @@ async function getAttractions(category) {
       id: 5,
       name: "Sunset Yoga Retreat",
       description: "Relax and rejuvenate with a beachside yoga session. Find inner peace as you practice yoga against the backdrop of a stunning sunset.",
-      image: "/placeholder.svg?height=450&width=300",
+      image: "/dha.png?height=450&width=300",
       category: "leisure",
       entryFee: 20,
       hours: "6:00 PM - 7:30 PM",

@@ -15,6 +15,8 @@ import { TourismSkeleton } from './Skelton/TourismSkeleton';
 import ContactPage from './pages/contact-page';
 import { ContactSkeleton } from './Skelton/contact-skeleton';
 import InteractiveGlobeSection from './pages/interactive-globe-section';
+import RatingSystem from './pages/RatingSystem';
+import RatingPage from './pages/RatingPage';
 function App() {
   return (
     <Router>
@@ -33,6 +35,8 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/contact-skeleton" element={<ContactSkeleton />} />
           <Route path="/globe" element={<InteractiveGlobeSection />} />
+          <Route path="/rating" element={<RatingSystem />} />
+          <Route path="/rating-page" element={<RatingPage />} />
         </Routes>
       </div>
     </Router>

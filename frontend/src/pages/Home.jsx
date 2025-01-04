@@ -26,7 +26,6 @@ function Button({ variant, className, children, ...props }) {
     </button>
   );
 }
-
 const openSlide = (index) => {
   console.log(`Opening page for slide ${index + 1}`);
 };
@@ -39,10 +38,9 @@ export default function HeroSection() {
   const slides = [
     "/kun.jpg",
     '/dha.png',
-    "/kun.jpg",
-    '/dha.png',
+    "/bungee.jpg",
+    '/aarti .jpg',
   ];
-
   const slideTexts = [
     { 
       title: "Thrilling River Rafting",
