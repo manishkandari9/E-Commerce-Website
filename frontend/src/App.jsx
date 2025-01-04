@@ -17,6 +17,7 @@ import { ContactSkeleton } from './Skelton/contact-skeleton';
 import InteractiveGlobeSection from './pages/interactive-globe-section';
 import RatingSystem from './pages/RatingSystem';
 import RatingPage from './pages/RatingPage';
+import BentoCard from './components/page/BentoCard';
 function App() {
   return (
     <Router>
@@ -37,6 +38,7 @@ function App() {
           <Route path="/globe" element={<InteractiveGlobeSection />} />
           <Route path="/rating" element={<RatingSystem />} />
           <Route path="/rating-page" element={<RatingPage />} />
+          <Route path="/bento" element={<BentoCard />} />
         </Routes>
       </div>
     </Router>
