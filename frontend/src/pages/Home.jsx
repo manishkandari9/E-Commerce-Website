@@ -37,32 +37,35 @@ export default function HeroSection() {
   const carouselRef = useRef(null);
 
   const slides = [
-    "/kun.jpg",
-    '/dha.png',
-    "/bungee.jpg",
+    "/raft.jpg",
+    '/camping.jpg',
+    "/bungeer.jpg",
     '/aarti .jpg',
   ];
   const slideTexts = [
-    { 
+    {
       title: "Thrilling River Rafting",
-      subtitle: "Rishikesh Adventure",
-      description: "Experience the adrenaline rush of navigating through Rishikesh's wild rapids. Our expert guides ensure a safe and unforgettable journey through the sacred Ganges."
+      subtitle: "Ride the Rapids",
+      description: "Conquer the wild rapids of Rishikesh's Ganges River. Guided by experts, embrace the adrenaline and beauty of this exhilarating water adventure."
     },
-    { 
-      title: "Scenic Mountain Trekking",
-      subtitle: "Himalayan Expedition",
-      description: "Embark on a breathtaking trek through the majestic Himalayas. Discover hidden trails, stunning vistas, and the rich culture of mountain communities."
+    
+    {
+      title: "Serene Camping Escape",
+      subtitle: "Under Rishikesh Skies",
+      description: "Reconnect with nature as you camp by Rishikesh's scenic landscapes. Enjoy starry nights, bonfires, and tranquil riverside vibes for an unforgettable outdoor adventure."
     },
-    { 
-      title: "Exhilarating Paragliding",
-      subtitle: "Soar Above the Peaks",
-      description: "Take to the skies and witness the beauty of the mountains from a bird's eye view. Our certified instructors provide a safe and thrilling paragliding experience."
+    {
+      title: "Exhilarating Bungee Jumping",
+      subtitle: "Rishikesh Heights",
+      description: "Take the ultimate leap from Rishikesh’s iconic cliffs. Feel the rush of free fall as our safety-certified experts guide you through this once-in-a-lifetime adventure."
     },
-    { 
-      title: "Serene Yoga Retreats",
-      subtitle: "Find Inner Peace",
-      description: "Rejuvenate your mind, body, and soul in the spiritual heart of India. Join our expert-led yoga sessions amidst the tranquil Himalayan landscape."
+    
+    {
+      title: "Sacred Ganga Aarti!",
+      subtitle: "Spiritual Rishikesh",
+      description: "Immerse yourself in the divine ambiance of Ganga Aarti. Witness the mesmerizing rituals, chanting, and glowing diyas that illuminate the sacred banks of the Ganges."
     }
+    
   ];
 
   const nextSlide = () => {
@@ -110,7 +113,7 @@ export default function HeroSection() {
               src={slides[currentSlide]}
               alt="Adventure background"
               className="object-cover w-full h-full"
-              style={{ filter: "brightness(0.6) saturate(1.2)" }}
+              style={{ filter: "brightness(0.8) saturate(1.5) contrast(1.2)", }}
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-blue-900/50 to-black/20" />
@@ -278,20 +281,16 @@ export default function HeroSection() {
                   isLoading ? 'opacity-0' : 'opacity-100'                
                 }`}                
                 >
-                  
                   <img                  
                   src={slide}                  
                   alt={`Adventure slide ${index + 1}`}                    
                   className="rounded-xl object-cover h-[180px] w-[160px] shadow-md transition-transform transform hover:scale-105 hover:shadow-2xl duration-300 ease-in-out mt-8 border border-gray-200"
-                  
                   />
                   </div>
                 </div>              
               ))}
               </div>
               </div>
-
-
                   {/* Navigation Arrows and Number */}
                   <div className="flex items-center gap-8">
                     <div className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center">
@@ -318,7 +317,6 @@ export default function HeroSection() {
                         </button>
                       )}
                     </div>
-
                     <div className="border-t-2 border-white/30 w-96" />
 
                     {/* Navigation Number */}

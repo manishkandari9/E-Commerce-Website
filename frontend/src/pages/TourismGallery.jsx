@@ -3,7 +3,6 @@ import { useTheme } from 'next-themes'
 import { motion, AnimatePresence } from 'framer-motion'
 import SkeletonGalleryLoader from '../Skelton/SkeletonGalleryLoader'
 
-
 const GalleryItem = ({ item, className = '' }) => {
   const [isHovered, setIsHovered] = useState(false)
   const videoRef = useRef(null)
@@ -78,13 +77,13 @@ export default function BentoGallery() {
       setItems([
         { id: '1', type: 'video', src: '/videos/tropical-beach.mp4', alt: 'Tropical beach', title: 'Tropical Paradise', description: 'Experience the serenity of pristine beaches.' },
         { id: '2', type: 'video', src: '/videos/mountain-hiking.mp4', alt: 'Mountain hiking', title: 'Alpine Adventure', description: 'Breathtaking mountain landscapes.' },
-        { id: '3', type: 'image', src: '/dha.png?height=400&width=300', alt: 'Cultural festival', title: 'Vibrant Traditions', description: 'Immerse in cultural experiences.' },
-        { id: '4', type: 'image', src: '/badri.jpg?height=400&width=300', alt: 'Scuba diving', title: 'Underwater Wonders', description: 'Explore marine life.' },
+        { id: '3', type: 'image', src: '/bungeer.jpg?height=400&width=300', alt: 'Cultural festival', title: 'Vibrant Traditions', description: 'Immerse in cultural experiences.' },
+        { id: '4', type: 'image', src: '/Raftn.jpg?height=400&width=300', alt: 'Scuba diving', title: 'Underwater Wonders', description: 'Explore marine life.' },
         { id: '5', type: 'image', src: '/aarti .jpg?height=400&width=800', alt: 'Wildlife safari', title: 'Safari Adventure', description: 'Get up close with majestic wildlife.' },
-        { id: '6', type: 'image', src: '/dev.jpg?height=400&width=300', alt: 'Local cuisine', title: 'Culinary Delights', description: 'Indulge in local cuisines.' },
+        { id: '6', type: 'image', src: '/camping.jpg?height=400&width=300', alt: 'Local cuisine', title: 'Culinary Delights', description: 'Indulge in local cuisines.' },
         { id: '7', type: 'video', src: '/videos/city-skyline.mp4', alt: 'City skyline', title: 'Urban Exploration', description: 'Discover vibrant cities.' },
         { id: '8', type: 'video', src: '/videos/ancient-ruins.mp4', alt: 'Ancient ruins', title: 'Historical Wonders', description: 'Marvel at ancient civilizations.' },
-        { id: '9', type: 'image', src: 'kunjapuri.jpg?height=200&width=200', alt: 'Street Food', title: 'Street Delicacies', description: 'Explore local street food.' },
+        { id: '9', type: 'image', src: 'raft.jpg?height=200&width=200', alt: 'Street Food', title: 'Street Delicacies', description: 'Explore local street food.' },
         { id: '10', type: 'image', src: '/aarti .jpg?height=200&width=200', alt: 'Fine Dining', title: 'Gourmet Experience', description: 'Luxury dining moments.' },
         { id: '11', type: 'image', src: '/Bungee.jpg?height=200&width=200', alt: 'Cooking Class', title: 'Cooking Adventures', description: 'Learn authentic recipes.' },
       ])
@@ -102,7 +101,7 @@ export default function BentoGallery() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.h1
-            className="text-4xl md:text-5xl font-bold mb-4 text-white"
+            className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white"
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
@@ -110,7 +109,7 @@ export default function BentoGallery() {
             Discover Amazing Places
           </motion.h1>
           <motion.p
-            className="text-xl text-gray-300 max-w-2xl mx-auto"
+            className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
@@ -122,44 +121,44 @@ export default function BentoGallery() {
           <SkeletonGalleryLoader />
         ) : (
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-4 gap-4 h-[800px]"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-4 gap-4 md:h-[800px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             {/* First column */}
-            <div className="md:row-span-2">
+            <div className="sm:col-span-1 md:row-span-2 h-64 sm:h-auto">
               <GalleryItem item={items[0]} className="h-full" />
             </div>
-            <div className="md:row-span-2">
+            <div className="sm:col-span-1 md:row-span-2 h-64 sm:h-auto">
               <GalleryItem item={items[1]} className="h-full" />
             </div>
             
             {/* Top right small items */}
-            <div className="md:col-span-2 grid grid-cols-3 gap-4">
-              <GalleryItem item={items[2]} />
-              <GalleryItem item={items[3]} />
-              <GalleryItem item={items[4]} />
+            <div className="sm:col-span-2 md:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <GalleryItem item={items[2]} className="h-48 sm:h-auto" />
+              <GalleryItem item={items[3]} className="h-48 sm:h-auto" />
+              <GalleryItem item={items[4]} className="h-48 sm:h-auto sm:col-span-1 col-span-2" />
             </div>
             
             {/* Center large item */}
-            <div className="md:col-span-2 md:row-span-2">
+            <div className="sm:col-span-2 md:col-span-2 md:row-span-2 h-64 sm:h-auto">
               <GalleryItem item={items[5]} className="h-full" />
             </div>
             
             {/* Bottom items */}
-            <div className="md:row-span-2">
+            <div className="sm:col-span-1 md:row-span-2 h-64 sm:h-auto">
               <GalleryItem item={items[6]} className="h-full" />
             </div>
-            <div className="md:row-span-2">
+            <div className="sm:col-span-1 md:row-span-2 h-64 sm:h-auto">
               <GalleryItem item={items[7]} className="h-full" />
             </div>
 
             {/* Bottom small items */}
-            <div className="md:col-span-2 grid grid-cols-3 gap-4">
-              <GalleryItem item={items[8]} />
-              <GalleryItem item={items[9]} />
-              <GalleryItem item={items[10]} />
+            <div className="sm:col-span-2 md:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <GalleryItem item={items[8]} className="h-48 sm:h-auto" />
+              <GalleryItem item={items[9]} className="h-48 sm:h-auto" />
+              <GalleryItem item={items[10]} className="h-48 sm:h-auto sm:col-span-1 col-span-2" />
             </div>
           </motion.div>
         )}
