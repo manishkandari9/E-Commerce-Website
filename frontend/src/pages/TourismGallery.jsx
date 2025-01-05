@@ -78,15 +78,15 @@ export default function BentoGallery() {
       setItems([
         { id: '1', type: 'video', src: '/videos/tropical-beach.mp4', alt: 'Tropical beach', title: 'Tropical Paradise', description: 'Experience the serenity of pristine beaches.' },
         { id: '2', type: 'video', src: '/videos/mountain-hiking.mp4', alt: 'Mountain hiking', title: 'Alpine Adventure', description: 'Breathtaking mountain landscapes.' },
-        { id: '3', type: 'video', src: '/videos/city-skyline.mp4', alt: 'City skyline', title: 'Urban Exploration', description: 'Discover vibrant cities.' },
-        { id: '4', type: 'video', src: '/videos/ancient-ruins.mp4', alt: 'Ancient ruins', title: 'Historical Wonders', description: 'Marvel at ancient civilizations.' },
-        { id: '5', type: 'image', src: '/placeholder.svg?height=400&width=800', alt: 'Wildlife safari', title: 'Safari Adventure', description: 'Get up close with majestic wildlife.' },
-        { id: '6', type: 'image', src: '/placeholder.svg?height=400&width=300', alt: 'Local cuisine', title: 'Culinary Delights', description: 'Indulge in local cuisines.' },
-        { id: '7', type: 'image', src: '/placeholder.svg?height=400&width=300', alt: 'Cultural festival', title: 'Vibrant Traditions', description: 'Immerse in cultural experiences.' },
-        { id: '8', type: 'image', src: '/placeholder.svg?height=400&width=300', alt: 'Scuba diving', title: 'Underwater Wonders', description: 'Explore marine life.' },
-        { id: '9', type: 'image', src: '/placeholder.svg?height=200&width=200', alt: 'Street Food', title: 'Street Delicacies', description: 'Explore local street food.' },
-        { id: '10', type: 'image', src: '/placeholder.svg?height=200&width=200', alt: 'Fine Dining', title: 'Gourmet Experience', description: 'Luxury dining moments.' },
-        { id: '11', type: 'image', src: '/placeholder.svg?height=200&width=200', alt: 'Cooking Class', title: 'Cooking Adventures', description: 'Learn authentic recipes.' },
+        { id: '3', type: 'image', src: '/dha.png?height=400&width=300', alt: 'Cultural festival', title: 'Vibrant Traditions', description: 'Immerse in cultural experiences.' },
+        { id: '4', type: 'image', src: '/badri.jpg?height=400&width=300', alt: 'Scuba diving', title: 'Underwater Wonders', description: 'Explore marine life.' },
+        { id: '5', type: 'image', src: '/aarti .jpg?height=400&width=800', alt: 'Wildlife safari', title: 'Safari Adventure', description: 'Get up close with majestic wildlife.' },
+        { id: '6', type: 'image', src: '/dev.jpg?height=400&width=300', alt: 'Local cuisine', title: 'Culinary Delights', description: 'Indulge in local cuisines.' },
+        { id: '7', type: 'video', src: '/videos/city-skyline.mp4', alt: 'City skyline', title: 'Urban Exploration', description: 'Discover vibrant cities.' },
+        { id: '8', type: 'video', src: '/videos/ancient-ruins.mp4', alt: 'Ancient ruins', title: 'Historical Wonders', description: 'Marvel at ancient civilizations.' },
+        { id: '9', type: 'image', src: 'kunjapuri.jpg?height=200&width=200', alt: 'Street Food', title: 'Street Delicacies', description: 'Explore local street food.' },
+        { id: '10', type: 'image', src: '/aarti .jpg?height=200&width=200', alt: 'Fine Dining', title: 'Gourmet Experience', description: 'Luxury dining moments.' },
+        { id: '11', type: 'image', src: '/Bungee.jpg?height=200&width=200', alt: 'Cooking Class', title: 'Cooking Adventures', description: 'Learn authentic recipes.' },
       ])
       setLoading(false)
     }, 2000)

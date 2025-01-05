@@ -70,7 +70,7 @@ export default function ContactPage() {
                 <label className="text-sm font-medium mb-2 block dark:text-gray-200">First Name</label>
                 <Input 
                   type="text" 
-                  placeholder="John" 
+                  placeholder="Name" 
                   className="bg-background/50 dark:bg-gray-900/50 dark:border-gray-600 dark:text-gray-200 dark:focus:border-blue-400" 
                 />
               </div>
@@ -78,7 +78,7 @@ export default function ContactPage() {
                 <label className="text-sm font-medium mb-2 block dark:text-gray-200">Last Name</label>
                 <Input 
                   type="text" 
-                  placeholder="Doe" 
+                  placeholder="Last Name" 
                   className="bg-background/50 dark:bg-gray-900/50 dark:border-gray-600 dark:text-gray-200 dark:focus:border-blue-400" 
                 />
               </div>
@@ -87,7 +87,7 @@ export default function ContactPage() {
               <label className="text-sm font-medium mb-2 block dark:text-gray-200">Email</label>
               <Input 
                 type="email" 
-                placeholder="john@example.com" 
+                placeholder="email@example.com" 
                 className="bg-background/50 dark:bg-gray-900/50 dark:border-gray-600 dark:text-gray-200 dark:focus:border-blue-400" 
               />
             </div>
@@ -133,7 +133,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-medium dark:text-gray-200">Phone</h3>
-                <p className="text-primary dark:text-blue-400">+1 (555) 123-4567</p>
+                <p className="text-primary dark:text-blue-400">+91 (783) 013-0183</p>
               </div>
             </div>
 
