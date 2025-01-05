@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, MapPin, Calendar, Users, DollarSign, Star } from 'lucide-react';
 import RatingPage from './RatingPage';
-import RatingSystem from './RatingSystem';
+import BentoCard from '../components/page/BentoCard';
 const destinations = [
   {
     name: "Taj Mahal, Agra",

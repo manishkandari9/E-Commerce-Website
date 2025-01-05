@@ -1,43 +1,73 @@
-'use client'
-
-import React, { useState, useEffect } from 'react'
-import Masonry from 'react-masonry-css'
+import React, { useState, useEffect, useRef } from 'react'
 import { useTheme } from 'next-themes'
+import { motion, AnimatePresence } from 'framer-motion'
 import SkeletonGalleryLoader from '../Skelton/SkeletonGalleryLoader'
 
-// Move breakpointColumns outside the component
-const breakpointColumnsObj = {
-  default: 4,
-  1100: 3,
-  700: 2,
-  500: 1
+
+const GalleryItem = ({ item, className = '' }) => {
+  const [isHovered, setIsHovered] = useState(false)
+  const videoRef = useRef(null)
+
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isHovered) {
+        videoRef.current.play()
+      } else {
+        videoRef.current.pause()
+        videoRef.current.currentTime = 0
+      }
+    }
+  }, [isHovered])
+
+  return (
+    <motion.div
+      className={`bg-gradient-to-br from-gray-900 to-black dark:from-gray-800 dark:to-black rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full ${className}`}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.05 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    >
+      <div className="relative h-full">
+        {item.type === 'image' ? (
+          <img
+            src={item.src}
+            alt={item.alt}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <video
+            ref={videoRef}
+            src={item.src}
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        )}
+        <AnimatePresence>
+          {isHovered && (
+            <motion.div
+              className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="text-center">
+                <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-300">{item.description}</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  )
 }
 
-const GalleryItem = ({ item }) => (
-  <div className="break-inside-avoid mb-8 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-    {item.type === 'image' ? (
-      <img
-        src={item.src}
-        alt={item.alt}
-        className="w-full h-auto object-cover"
-      />
-    ) : (
-      <video
-        src={item.src}
-        controls
-        className="w-full h-auto"
-      />
-    )}
-    <div className="p-6">
-      <h3 className="text-2xl font-semibold mb-2 text-gray-800 dark:text-white">{item.title}</h3>
-      <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
-      <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-300">
-        Learn More
-      </button>
-    </div>
-  </div>
-)
-export default function TourismGallery() {
+export default function BentoGallery() {
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const { theme } = useTheme()
@@ -46,42 +76,92 @@ export default function TourismGallery() {
     // Simulating API call to fetch gallery items
     setTimeout(() => {
       setItems([
-        { id: '1', type: 'image', src: '/kun.jpg', alt: 'Tropical beach', title: 'Tropical Paradise', description: 'Experience the serenity of pristine beaches and crystal-clear waters.' },
-        { id: '2', type: 'video', src: 'https://example.com/video1.mp4', alt: 'Mountain hiking', title: 'Alpine Adventure', description: 'Embark on an exhilarating journey through breathtaking mountain landscapes.' },
-        { id: '3', type: 'image', src: '/placeholder.svg?height=500&width=400', alt: 'City skyline', title: 'Urban Exploration', description: 'Discover the vibrant energy and hidden gems of world-class cities.' },
-        { id: '4', type: 'image', src: '/placeholder.svg?height=300&width=500', alt: 'Ancient ruins', title: 'Historical Wonders', description: 'Step back in time and marvel at the architectural feats of ancient civilizations.' },
-        { id: '5', type: 'video', src: 'https://example.com/video2.mp4', alt: 'Wildlife safari', title: 'Safari Adventure', description: 'Get up close with majestic wildlife in their natural habitats.' },
-        { id: '6', type: 'image', src: '/placeholder.svg?height=450&width=600', alt: 'Local cuisine', title: 'Culinary Delights', description: 'Indulge in a gastronomic journey through diverse and delicious local cuisines.' },
-        { id: '7', type: 'image', src: '/placeholder.svg?height=400&width=300', alt: 'Cultural festival', title: 'Vibrant Traditions', description: 'Immerse yourself in colorful festivals and rich cultural experiences.' },
-        { id: '8', type: 'video', src: 'https://example.com/video3.mp4', alt: 'Scuba diving', title: 'Underwater Wonders', description: 'Explore the mesmerizing beauty of coral reefs and marine life.' },
+        { id: '1', type: 'video', src: '/videos/tropical-beach.mp4', alt: 'Tropical beach', title: 'Tropical Paradise', description: 'Experience the serenity of pristine beaches.' },
+        { id: '2', type: 'video', src: '/videos/mountain-hiking.mp4', alt: 'Mountain hiking', title: 'Alpine Adventure', description: 'Breathtaking mountain landscapes.' },
+        { id: '3', type: 'video', src: '/videos/city-skyline.mp4', alt: 'City skyline', title: 'Urban Exploration', description: 'Discover vibrant cities.' },
+        { id: '4', type: 'video', src: '/videos/ancient-ruins.mp4', alt: 'Ancient ruins', title: 'Historical Wonders', description: 'Marvel at ancient civilizations.' },
+        { id: '5', type: 'image', src: '/placeholder.svg?height=400&width=800', alt: 'Wildlife safari', title: 'Safari Adventure', description: 'Get up close with majestic wildlife.' },
+        { id: '6', type: 'image', src: '/placeholder.svg?height=400&width=300', alt: 'Local cuisine', title: 'Culinary Delights', description: 'Indulge in local cuisines.' },
+        { id: '7', type: 'image', src: '/placeholder.svg?height=400&width=300', alt: 'Cultural festival', title: 'Vibrant Traditions', description: 'Immerse in cultural experiences.' },
+        { id: '8', type: 'image', src: '/placeholder.svg?height=400&width=300', alt: 'Scuba diving', title: 'Underwater Wonders', description: 'Explore marine life.' },
+        { id: '9', type: 'image', src: '/placeholder.svg?height=200&width=200', alt: 'Street Food', title: 'Street Delicacies', description: 'Explore local street food.' },
+        { id: '10', type: 'image', src: '/placeholder.svg?height=200&width=200', alt: 'Fine Dining', title: 'Gourmet Experience', description: 'Luxury dining moments.' },
+        { id: '11', type: 'image', src: '/placeholder.svg?height=200&width=200', alt: 'Cooking Class', title: 'Cooking Adventures', description: 'Learn authentic recipes.' },
       ])
       setLoading(false)
     }, 2000)
   }, [])
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'dark' : ''}`}>
+    <div className={`min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-indigo-900 ${theme === 'dark' ? 'dark' : ''}`}>
       <main className="container mx-auto px-4 py-8">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-white">
+        <motion.header
+          className="text-center mb-12"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.h1
+            className="text-4xl md:text-5xl font-bold mb-4 text-white"
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
             Discover Amazing Places
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          </motion.h1>
+          <motion.p
+            className="text-xl text-gray-300 max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
             Embark on unforgettable journeys and create lasting memories with our curated travel experiences.
-          </p>
-        </header>
+          </motion.p>
+        </motion.header>
         {loading ? (
           <SkeletonGalleryLoader />
         ) : (
-          <Masonry
-            breakpointCols={breakpointColumnsObj}
-            className="flex w-auto -ml-4"
-            columnClassName="pl-4 bg-clip-padding"
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-4 gap-4 h-[800px]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
           >
-            {items.map((item) => (
-              <GalleryItem key={item.id} item={item} />
-            ))}
-          </Masonry>
+            {/* First column */}
+            <div className="md:row-span-2">
+              <GalleryItem item={items[0]} className="h-full" />
+            </div>
+            <div className="md:row-span-2">
+              <GalleryItem item={items[1]} className="h-full" />
+            </div>
+            
+            {/* Top right small items */}
+            <div className="md:col-span-2 grid grid-cols-3 gap-4">
+              <GalleryItem item={items[2]} />
+              <GalleryItem item={items[3]} />
+              <GalleryItem item={items[4]} />
+            </div>
+            
+            {/* Center large item */}
+            <div className="md:col-span-2 md:row-span-2">
+              <GalleryItem item={items[5]} className="h-full" />
+            </div>
+            
+            {/* Bottom items */}
+            <div className="md:row-span-2">
+              <GalleryItem item={items[6]} className="h-full" />
+            </div>
+            <div className="md:row-span-2">
+              <GalleryItem item={items[7]} className="h-full" />
+            </div>
+
+            {/* Bottom small items */}
+            <div className="md:col-span-2 grid grid-cols-3 gap-4">
+              <GalleryItem item={items[8]} />
+              <GalleryItem item={items[9]} />
+              <GalleryItem item={items[10]} />
+            </div>
+          </motion.div>
         )}
       </main>
     </div>

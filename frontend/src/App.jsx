@@ -18,6 +18,8 @@ import InteractiveGlobeSection from './pages/interactive-globe-section';
 import RatingSystem from './pages/RatingSystem';
 import RatingPage from './pages/RatingPage';
 import BentoCard from './components/page/BentoCard';
+import Footer from './components/page/footer';
+import FooterSkeleton from './Skelton/footer-skeleton';
 function App() {
   return (
     <Router>
@@ -39,6 +41,8 @@ function App() {
           <Route path="/rating" element={<RatingSystem />} />
           <Route path="/rating-page" element={<RatingPage />} />
           <Route path="/bento" element={<BentoCard />} />
+          <Route path="/footer" element={<Footer />} />
+          <Route path="/footer-skeleton" element={<FooterSkeleton />} />
         </Routes>
       </div>
     </Router>

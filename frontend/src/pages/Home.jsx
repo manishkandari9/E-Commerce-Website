@@ -8,6 +8,7 @@ import TourismGallery from './TourismGallery';
 import { TourismSection } from './TourismSection';
 import ContactPage from './contact-page';
 import InteractiveGlobeSection from './interactive-globe-section';
+import Footer from '../components/page/footer';
 import SkeletonLoader, { SkeletonText, SkeletonTitle, SkeletonButton, SkeletonImage } from '../Skelton/SkeletonLoader';
 
 function Button({ variant, className, children, ...props }) {
@@ -344,7 +345,7 @@ export default function HeroSection() {
       <TourismSection/>
       <InteractiveGlobeSection/>
       <ContactPage/>
-   
+      <Footer />
     </>
   );
 }
