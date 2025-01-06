@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, MapPin, Calendar, Users, DollarSign, Star } from 'lucide-react';
 import RatingPage from './RatingPage';
-import BentoCard from '../components/page/BentoCard';
+import Booking from '../components/page/Booking';
 const destinations = [
   {
     name: "Taj Mahal, Agra",
@@ -103,6 +103,7 @@ const cardVariants = {
 function DestinationCard({ destination }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isRatingPageOpen, setIsRatingPageOpen] = useState(false);
+  const [isBookingPageOpen, setIsBookingPageOpen] = useState(false);
 
   return (
     <motion.div
@@ -171,7 +172,7 @@ function DestinationCard({ destination }) {
             <ChevronRight className={`ml-2 h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`} />
           </button>
           <button
-            onClick={() => alert(`Booking for ${destination.name}`)}
+            onClick={() => setIsBookingPageOpen(true)}
             className="flex-1 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md transition-colors duration-200 flex items-center justify-center"
           >
             <span>Book Now</span>
