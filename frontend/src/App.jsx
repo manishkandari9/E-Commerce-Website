@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // Importing components directly
 import Home from './pages/Home';
-import Auth from './components/Auth/auth';
+import Auth from './components/Auth/Auth';
 import ExploreDestinations from './pages/ExploreDestinations';
 import SkeletonCard from './Skelton/SkeletonCard';
 import AttractionsPage from './pages/attractions-page';

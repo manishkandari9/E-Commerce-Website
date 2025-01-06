@@ -5,7 +5,7 @@ import { OrbitControls } from '@react-three/drei';
 import { X, Menu, User, Moon, Sun } from 'lucide-react';
 import * as THREE from 'three';
 import Cookies from 'js-cookie';
-import Auth from './Auth/auth';
+import Auth from './Auth/Auth';
 import NavbarSkeleton from '../Skelton/NavbarSkeleton';
 
 const AnimatedLogo = () => {
