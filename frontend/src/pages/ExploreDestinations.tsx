@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, MapPin, Calendar, Users, DollarSign, Star } from 'lucide-react';
-import RatingPage from './RatingPage';
-import Booking from '../components/page/Booking';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight, MapPin, Calendar, Users, DollarSign, Star } from "lucide-react";
+import RatingPage from "./RatingPage";
+import { useNavigate } from "react-router-dom";
+
 const destinations = [
   {
     name: "Taj Mahal, Agra",
@@ -11,10 +12,10 @@ const destinations = [
     details: {
       duration: "1-2 days",
       bestTime: "October to March",
-      groupSize: "Any"
+      groupSize: "Any",
     },
     price: "₹1,500",
-    rating: 4.9
+    rating: 4.9,
   },
   {
     name: "Varanasi Ghats",
@@ -23,10 +24,10 @@ const destinations = [
     details: {
       duration: "2-3 days",
       bestTime: "November to February",
-      groupSize: "Small groups"
+      groupSize: "Small groups",
     },
     price: "₹2,000",
-    rating: 4.7
+    rating: 4.7,
   },
   {
     name: "Jaipur Pink City",
@@ -35,10 +36,10 @@ const destinations = [
     details: {
       duration: "3-4 days",
       bestTime: "November to February",
-      groupSize: "Any"
+      groupSize: "Any",
     },
     price: "₹2,500",
-    rating: 4.8
+    rating: 4.8,
   },
   {
     name: "Kerala Backwaters",
@@ -47,10 +48,10 @@ const destinations = [
     details: {
       duration: "2-3 days",
       bestTime: "September to March",
-      groupSize: "Couples or small groups"
+      groupSize: "Couples or small groups",
     },
     price: "₹3,000",
-    rating: 4.9
+    rating: 4.9,
   },
   {
     name: "Ladakh Himalayan Retreat",
@@ -59,10 +60,10 @@ const destinations = [
     details: {
       duration: "7-10 days",
       bestTime: "June to September",
-      groupSize: "Small groups"
+      groupSize: "Small groups",
     },
     price: "₹5,000",
-    rating: 4.8
+    rating: 4.8,
   },
   {
     name: "Goa Beaches",
@@ -71,39 +72,23 @@ const destinations = [
     details: {
       duration: "4-5 days",
       bestTime: "November to February",
-      groupSize: "Any"
+      groupSize: "Any",
     },
     price: "₹2,800",
-    rating: 4.6
-  }
+    rating: 4.6,
+  },
 ];
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { 
-      type: "spring",
-      stiffness: 100,
-      damping: 12,
-      duration: 0.5 
-    } 
-  },
-  hover: { 
-    scale: 1.03, 
-    transition: { 
-      type: "spring", 
-      stiffness: 300, 
-      damping: 10 
-    } 
-  },
+  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 12 } },
+  hover: { scale: 1.03, transition: { type: "spring", stiffness: 300, damping: 10 } },
 };
 
 function DestinationCard({ destination }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isRatingPageOpen, setIsRatingPageOpen] = useState(false);
-  const [isBookingPageOpen, setIsBookingPageOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -113,17 +98,16 @@ function DestinationCard({ destination }) {
       animate="visible"
       whileHover="hover"
     >
+      {/* Image Section */}
       <div className="relative aspect-video">
-        <img
-          src={destination.image}
-          alt={destination.name}
-          className="w-full h-full object-cover"
-        />
+        <img src={destination.image} alt={destination.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <h3 className="text-white font-bold text-xl md:text-2xl">{destination.name}</h3>
         </div>
       </div>
+
+      {/* Details Section */}
       <div className="p-4">
         <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">{destination.description}</p>
         <div className="flex justify-between items-center mb-4">
@@ -131,7 +115,7 @@ function DestinationCard({ destination }) {
             <DollarSign className="w-5 h-5 text-green-500 mr-1" />
             <span className="font-semibold text-gray-800 dark:text-gray-200">{destination.price}</span>
           </div>
-          <button 
+          <button
             onClick={() => setIsRatingPageOpen(true)}
             className="flex items-center bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded-full transition duration-200"
           >
@@ -139,6 +123,7 @@ function DestinationCard({ destination }) {
             <span>{destination.rating}</span>
           </button>
         </div>
+
         <AnimatePresence>
           {isExpanded && (
             <motion.div
@@ -150,41 +135,52 @@ function DestinationCard({ destination }) {
             >
               <div className="flex items-center mb-2">
                 <Calendar className="w-4 h-4 mr-2 text-blue-500" />
-                <span className="text-sm text-gray-600 dark:text-gray-300">Duration: {destination.details.duration}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">
+                  Duration: {destination.details.duration}
+                </span>
               </div>
               <div className="flex items-center mb-2">
                 <Users className="w-4 h-4 mr-2 text-green-500" />
-                <span className="text-sm text-gray-600 dark:text-gray-300">Best for: {destination.details.groupSize}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">
+                  Best for: {destination.details.groupSize}
+                </span>
               </div>
               <div className="flex items-center">
                 <MapPin className="w-4 h-4 mr-2 text-red-500" />
-                <span className="text-sm text-gray-600 dark:text-gray-300">Best time: {destination.details.bestTime}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">
+                  Best time: {destination.details.bestTime}
+                </span>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-2 mt-2">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="flex-1 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors duration-200 flex items-center justify-center"
           >
-            <span>{isExpanded ? 'Less Info' : 'More Info'}</span>
-            <ChevronRight className={`ml-2 h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`} />
+            <span>{isExpanded ? "Less Info" : "More Info"}</span>
+            <ChevronRight
+              className={`ml-2 h-4 w-4 transition-transform duration-200 ${
+                isExpanded ? "rotate-90" : ""
+              }`}
+            />
           </button>
           <button
-            onClick={() => setIsBookingPageOpen(true)}
+            onClick={() => navigate("/booking", { state: { destination } })}
             className="flex-1 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md transition-colors duration-200 flex items-center justify-center"
           >
             <span>Book Now</span>
           </button>
         </div>
       </div>
+
+      {/* Rating Page */}
       <AnimatePresence>
         {isRatingPageOpen && (
-          <RatingPage
-            destination={destination}
-            onClose={() => setIsRatingPageOpen(false)}
-          />
+          <RatingPage destination={destination} onClose={() => setIsRatingPageOpen(false)} />
         )}
       </AnimatePresence>
     </motion.div>
@@ -231,15 +227,15 @@ export default function ExploreDestinations() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence>
             {isLoading
-              ? Array(6).fill(0).map((_, index) => <SkeletonCard key={index} />)
+              ? Array(6)
+                  .fill(0)
+                  .map((_, index) => <SkeletonCard key={index} />)
               : destinations.map((destination) => (
                   <DestinationCard key={destination.name} destination={destination} />
-                ))
-            }
+                ))}
           </AnimatePresence>
         </div>
       </div>
     </section>
   );
 }
-
