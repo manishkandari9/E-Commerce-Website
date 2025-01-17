@@ -1,467 +1,7 @@
-// 'use client'
-
-// import React, { useState } from 'react'
-// import { motion } from 'framer-motion'
-// import { Calendar, Users, DollarSign } from 'lucide-react'
-
-// const Booking = ({ destination }) => {
-//   const [bookingDetails, setBookingDetails] = useState({
-//     name: '',
-//     email: '',
-//     phone: '',
-//     date: '',
-//     guests: 1,
-//     paymentMethod: 'credit-card'
-//   })
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target
-//     setBookingDetails(prev => ({ ...prev, [name]: value }))
-//   }
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault()
-//     console.log('Booking submitted:', bookingDetails)
-//     alert('Booking submitted successfully!')
-//   }
-
-//   // Inline Button component
-//   const Button = ({ children, ...props }) => (
-//     <button
-//       {...props}
-//       className="bg-blue-500 text-white font-medium py-2 px-4 rounded hover:bg-blue-600"
-//     >
-//       {children}
-//     </button>
-//   )
-
-//   // Inline Input component
-//   const Input = ({ ...props }) => (
-//     <input
-//       {...props}
-//       className="w-full border border-gray-300 rounded-md p-2 text-gray-900 focus:ring focus:ring-blue-500"
-//     />
-//   )
-
-//   // Inline Label component
-//   const Label = ({ children, htmlFor }) => (
-//     <label htmlFor={htmlFor} className="block text-sm font-medium text-gray-700 mb-1">
-//       {children}
-//     </label>
-//   )
-
-//   // Inline RadioGroup components
-//   const RadioGroup = ({ children, name, onValueChange }) => {
-//     const handleChange = (e) => {
-//       onValueChange(e.target.value)
-//     }
-//     return <div onChange={handleChange}>{children}</div>
-//   }
-//   const RadioGroupItem = ({ id, value, ...props }) => (
-//     <input type="radio" id={id} value={value} {...props} />
-//   )
-
-//   // Inline Select components
-//   const Select = ({ children, name, onValueChange }) => {
-//     const handleChange = (e) => {
-//       onValueChange(e.target.value)
-//     }
-//     return (
-//       <select
-//         name={name}
-//         onChange={handleChange}
-//         className="w-full border border-gray-300 rounded-md p-2 text-gray-900"
-//       >
-//         {children}
-//       </select>
-//     )
-//   }
-//   const SelectItem = ({ value, children }) => (
-//     <option value={value}>{children}</option>
-//   )
-
-//   return (
-//     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-//       <motion.div
-//         initial={{ opacity: 0, y: 20 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         transition={{ duration: 0.5 }}
-//         className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden"
-//       >
-//         <div className="md:flex">
-//           <div className="md:flex-shrink-0">
-//             <img className="h-48 w-full object-cover md:w-48" src={destination.image} alt={destination.name} />
-//           </div>
-//           <div className="p-8">
-//             <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{destination.name}</div>
-//             <p className="mt-2 text-gray-500 dark:text-gray-400">{destination.description}</p>
-//             <div className="mt-4">
-//               <div className="flex items-center">
-//                 <Calendar className="h-5 w-5 text-gray-400 mr-2" />
-//                 <p className="text-sm text-gray-600 dark:text-gray-300">Duration: {destination.details.duration}</p>
-//               </div>
-//               <div className="flex items-center mt-2">
-//                 <Users className="h-5 w-5 text-gray-400 mr-2" />
-//                 <p className="text-sm text-gray-600 dark:text-gray-300">Best for: {destination.details.groupSize}</p>
-//               </div>
-//               <div className="flex items-center mt-2">
-//                 <DollarSign className="h-5 w-5 text-gray-400 mr-2" />
-//                 <p className="text-sm text-gray-600 dark:text-gray-300">Price: {destination.price}</p>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//         <div className="px-8 py-6 bg-gray-50 dark:bg-gray-700">
-//           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-6">Book Your Trip</h3>
-//           <form onSubmit={handleSubmit} className="space-y-6">
-//             <div>
-//               <Label htmlFor="name">Full Name</Label>
-//               <Input id="name" name="name" type="text" required onChange={handleInputChange} />
-//             </div>
-//             <div>
-//               <Label htmlFor="email">Email</Label>
-//               <Input id="email" name="email" type="email" required onChange={handleInputChange} />
-//             </div>
-//             <div>
-//               <Label htmlFor="phone">Phone</Label>
-//               <Input id="phone" name="phone" type="tel" required onChange={handleInputChange} />
-//             </div>
-//             <div>
-//               <Label htmlFor="date">Travel Date</Label>
-//               <Input id="date" name="date" type="date" required onChange={handleInputChange} />
-//             </div>
-//             <div>
-//               <Label htmlFor="guests">Number of Guests</Label>
-//               <Select name="guests" onValueChange={(value) => handleInputChange({ target: { name: 'guests', value }})}>
-//                 {[1, 2, 3, 4, 5].map(num => (
-//                   <SelectItem key={num} value={num.toString()}>{num}</SelectItem>
-//                 ))}
-//               </Select>
-//             </div>
-//             <div>
-//               <Label>Payment Method</Label>
-//               <RadioGroup name="paymentMethod" onValueChange={(value) => handleInputChange({ target: { name: 'paymentMethod', value }})}>
-//                 <div className="flex items-center space-x-2">
-//                   <RadioGroupItem value="credit-card" id="credit-card" />
-//                   <Label htmlFor="credit-card">Credit Card</Label>
-//                 </div>
-//                 <div className="flex items-center space-x-2">
-//                   <RadioGroupItem value="paypal" id="paypal" />
-//                   <Label htmlFor="paypal">PayPal</Label>
-//                 </div>
-//               </RadioGroup>
-//             </div>
-//             <Button type="submit" className="w-full">
-//               Confirm Booking
-//             </Button>
-//           </form>
-//         </div>
-//       </motion.div>
-//     </div>
-//   )
-// }
-
-// export default Booking
-
-
-// import React, { useState, useEffect } from 'react';
-
-// const BookingPage = () => {
-//   const [destinations, setDestinations] = useState([]);
-//   const [selectedDestination, setSelectedDestination] = useState('');
-//   const [checkInDate, setCheckInDate] = useState('');
-//   const [checkOutDate, setCheckOutDate] = useState('');
-//   const [guests, setGuests] = useState(1);
-//   const [roomType, setRoomType] = useState('');
-
-//   useEffect(() => {
-//     const fetchDestinations = async () => {
-//       // Simulating API call
-//       const response = await new Promise(resolve => 
-//         setTimeout(() => resolve(['Paris', 'Tokyo', 'New York', 'London', 'Bali', 'Rome']), 1000)
-//       );
-//       setDestinations(response);
-//     };
-
-//     fetchDestinations();
-//   }, []);
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log('Booking submitted:', { selectedDestination, checkInDate, checkOutDate, guests, roomType });
-//     // Here you would typically make an API call to submit the booking
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-//       <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-//         <div className="md:flex">
-//           <div className="md:flex-shrink-0">
-//             <img className="h-48 w-full object-cover md:w-48" src="/placeholder.svg?height=400&width=300" alt="Vacation destination" />
-//           </div>
-//           <div className="p-8">
-//             <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Book Your Dream Vacation</div>
-//             <form onSubmit={handleSubmit} className="mt-6">
-//               <div className="mb-4">
-//                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="destination">
-//                   Destination
-//                 </label>
-//                 <select
-//                   id="destination"
-//                   value={selectedDestination}
-//                   onChange={(e) => setSelectedDestination(e.target.value)}
-//                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                 >
-//                   <option value="">Select Destination</option>
-//                   {destinations.map((dest) => (
-//                     <option key={dest} value={dest}>{dest}</option>
-//                   ))}
-//                 </select>
-//               </div>
-//               <div className="mb-4 flex space-x-4">
-//                 <div className="w-1/2">
-//                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkIn">
-//                     Check-in
-//                   </label>
-//                   <input
-//                     id="checkIn"
-//                     type="date"
-//                     value={checkInDate}
-//                     onChange={(e) => setCheckInDate(e.target.value)}
-//                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                   />
-//                 </div>
-//                 <div className="w-1/2">
-//                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkOut">
-//                     Check-out
-//                   </label>
-//                   <input
-//                     id="checkOut"
-//                     type="date"
-//                     value={checkOutDate}
-//                     onChange={(e) => setCheckOutDate(e.target.value)}
-//                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                   />
-//                 </div>
-//               </div>
-//               <div className="mb-4">
-//                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="guests">
-//                   Number of Guests
-//                 </label>
-//                 <input
-//                   id="guests"
-//                   type="number"
-//                   min="1"
-//                   value={guests}
-//                   onChange={(e) => setGuests(e.target.value)}
-//                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                 />
-//               </div>
-//               <div className="mb-6">
-//                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="roomType">
-//                   Room Type
-//                 </label>
-//                 <select
-//                   id="roomType"
-//                   value={roomType}
-//                   onChange={(e) => setRoomType(e.target.value)}
-//                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                 >
-//                   <option value="">Select Room Type</option>
-//                   <option value="Standard">Standard</option>
-//                   <option value="Deluxe">Deluxe</option>
-//                   <option value="Suite">Suite</option>
-//                 </select>
-//               </div>
-//               <div className="flex items-center justify-between">
-//                 <button
-//                   type="submit"
-//                   className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
-//                 >
-//                   Book Now
-//                 </button>
-//               </div>
-//             </form>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default BookingPage;
-
-
-// import React, { useState, useEffect } from 'react';
-// import { useRouter } from 'next/router';
-
-// const BookingPage = () => {
-//   const router = useRouter();
-//   const { id } = router.query; // Assuming the booking ID is passed as a query parameter
-
-//   const [destinations, setDestinations] = useState([]);
-//   const [selectedDestination, setSelectedDestination] = useState('');
-//   const [checkInDate, setCheckInDate] = useState('');
-//   const [checkOutDate, setCheckOutDate] = useState('');
-//   const [guests, setGuests] = useState(1);
-//   const [roomType, setRoomType] = useState('');
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchDestinations = async () => {
-//       // Simulating API call to fetch destinations
-//       const response = await new Promise(resolve => 
-//         setTimeout(() => resolve(['Paris', 'Tokyo', 'New York', 'London', 'Bali', 'Rome']), 1000)
-//       );
-//       setDestinations(response);
-//     };
-
-//     const fetchBookingDetails = async () => {
-//       if (id) {
-//         // Simulating API call to fetch booking details based on ID
-//         const response = await new Promise(resolve =>
-//           setTimeout(() => resolve({
-//             destination: 'Paris',
-//             checkIn: '2023-07-01',
-//             checkOut: '2023-07-07',
-//             guests: 2,
-//             roomType: 'Deluxe'
-//           }), 1500)
-//         );
-//         setSelectedDestination(response.destination);
-//         setCheckInDate(response.checkIn);
-//         setCheckOutDate(response.checkOut);
-//         setGuests(response.guests);
-//         setRoomType(response.roomType);
-//       }
-//       setLoading(false);
-//     };
-
-//     fetchDestinations();
-//     fetchBookingDetails();
-//   }, [id]);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     // Simulating API call to submit booking
-//     await new Promise(resolve => setTimeout(resolve, 1500));
-//     console.log('Booking submitted:', { selectedDestination, checkInDate, checkOutDate, guests, roomType });
-//     setLoading(false);
-//     // Here you would typically make an actual API call to submit the booking
-//     alert('Booking successful!');
-//   };
-
-//   if (loading) {
-//     return (
-//       <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
-//         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-//       <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-//         <div className="md:flex">
-//           <div className="md:flex-shrink-0">
-//             <img className="h-48 w-full object-cover md:w-48" src={`/placeholder.svg?height=400&width=300&text=${selectedDestination}`} alt="Vacation destination" />
-//           </div>
-//           <div className="p-8">
-//             <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Book Your Dream Vacation</div>
-//             <form onSubmit={handleSubmit} className="mt-6">
-//               <div className="mb-4">
-//                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="destination">
-//                   Destination
-//                 </label>
-//                 <select
-//                   id="destination"
-//                   value={selectedDestination}
-//                   onChange={(e) => setSelectedDestination(e.target.value)}
-//                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                 >
-//                   <option value="">Select Destination</option>
-//                   {destinations.map((dest) => (
-//                     <option key={dest} value={dest}>{dest}</option>
-//                   ))}
-//                 </select>
-//               </div>
-//               <div className="mb-4 flex space-x-4">
-//                 <div className="w-1/2">
-//                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkIn">
-//                     Check-in
-//                   </label>
-//                   <input
-//                     id="checkIn"
-//                     type="date"
-//                     value={checkInDate}
-//                     onChange={(e) => setCheckInDate(e.target.value)}
-//                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                   />
-//                 </div>
-//                 <div className="w-1/2">
-//                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkOut">
-//                     Check-out
-//                   </label>
-//                   <input
-//                     id="checkOut"
-//                     type="date"
-//                     value={checkOutDate}
-//                     onChange={(e) => setCheckOutDate(e.target.value)}
-//                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                   />
-//                 </div>
-//               </div>
-//               <div className="mb-4">
-//                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="guests">
-//                   Number of Guests
-//                 </label>
-//                 <input
-//                   id="guests"
-//                   type="number"
-//                   min="1"
-//                   value={guests}
-//                   onChange={(e) => setGuests(parseInt(e.target.value))}
-//                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                 />
-//               </div>
-//               <div className="mb-6">
-//                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="roomType">
-//                   Room Type
-//                 </label>
-//                 <select
-//                   id="roomType"
-//                   value={roomType}
-//                   onChange={(e) => setRoomType(e.target.value)}
-//                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                 >
-//                   <option value="">Select Room Type</option>
-//                   <option value="Standard">Standard</option>
-//                   <option value="Deluxe">Deluxe</option>
-//                   <option value="Suite">Suite</option>
-//                 </select>
-//               </div>
-//               <div className="flex items-center justify-between">
-//                 <button
-//                   type="submit"
-//                   className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
-//                   disabled={loading}
-//                 >
-//                   {loading ? 'Booking...' : 'Book Now'}
-//                 </button>
-//               </div>
-//             </form>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default BookingPage;
-
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { CalendarIcon, UsersIcon, BedDoubleIcon, CreditCardIcon, MapPinIcon, StarIcon } from 'lucide-react';
+import SkeletonLoader from '../../Skelton/SkeletonLoader';
 
 const BookingPage = () => {
   const location = useLocation();
@@ -471,6 +11,7 @@ const BookingPage = () => {
   const [checkOutDate, setCheckOutDate] = useState('');
   const [guests, setGuests] = useState(1);
   const [roomType, setRoomType] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -485,9 +26,17 @@ const BookingPage = () => {
     // Simulating API call to fetch destinations
     const fetchDestinations = async () => {
       const response = await new Promise((resolve) =>
-        setTimeout(() => resolve(['Paris', 'Tokyo', 'New York', 'London', 'Bali', 'Rome']), 1000)
+        setTimeout(() => resolve([
+          { name: 'Paris', rating: 4.8, price: '$200' },
+          { name: 'Tokyo', rating: 4.9, price: '$250' },
+          { name: 'New York', rating: 4.7, price: '$180' },
+          { name: 'London', rating: 4.6, price: '$190' },
+          { name: 'Bali', rating: 4.5, price: '$150' },
+          { name: 'Rome', rating: 4.7, price: '$170' }
+        ]), 2000) // Increased timeout to 2 seconds to show the skeleton loader
       );
       setDestinations(response);
+      setLoading(false);
     };
 
     fetchDestinations();
@@ -499,107 +48,187 @@ const BookingPage = () => {
     // Here you would typically make an API call to submit the booking
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Book Your Dream Vacation</h1>
+          <SkeletonLoader />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-        <div className="md:flex">
-          <div className="md:flex-shrink-0">
-            <img
-              className="h-48 w-full object-cover md:w-48"
-              src={new URLSearchParams(location.search).get('image') || '/placeholder.svg'}
-              alt={selectedDestination || 'Vacation destination'}
-            />
-          </div>
-          <div className="p-8">
-            <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-              {selectedDestination ? `Book Your Dream Vacation to ${selectedDestination}` : 'Book Your Dream Vacation'}
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Book Your Dream Vacation</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Main Booking Form */}
+          <div className="col-span-1 md:col-span-2 lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+            <div className="p-8">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="destination">
+                    Destination
+                  </label>
+                  <select
+                    id="destination"
+                    value={selectedDestination}
+                    onChange={(e) => setSelectedDestination(e.target.value)}
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  >
+                    <option value="">Select Destination</option>
+                    {destinations.map((dest) => (
+                      <option key={dest.name} value={dest.name}>
+                        {dest.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="checkIn">
+                      Check-in
+                    </label>
+                    <input
+                      id="checkIn"
+                      type="date"
+                      value={checkInDate}
+                      onChange={(e) => setCheckInDate(e.target.value)}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="checkOut">
+                      Check-out
+                    </label>
+                    <input
+                      id="checkOut"
+                      type="date"
+                      value={checkOutDate}
+                      onChange={(e) => setCheckOutDate(e.target.value)}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="guests">
+                    Number of Guests
+                  </label>
+                  <input
+                    id="guests"
+                    type="number"
+                    min="1"
+                    value={guests}
+                    onChange={(e) => setGuests(parseInt(e.target.value))}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="roomType">
+                    Room Type
+                  </label>
+                  <select
+                    id="roomType"
+                    value={roomType}
+                    onChange={(e) => setRoomType(e.target.value)}
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  >
+                    <option value="">Select Room Type</option>
+                    <option value="Standard">Standard</option>
+                    <option value="Deluxe">Deluxe</option>
+                    <option value="Suite">Suite</option>
+                  </select>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    Book Now
+                  </button>
+                </div>
+              </form>
             </div>
-            <p className="text-gray-700 text-base mt-2">
-              {new URLSearchParams(location.search).get('description') || 'Plan your next getaway with ease. Select your preferences below!'}
-            </p>
-            <form onSubmit={handleSubmit} className="mt-6">
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="destination">
-                  Destination
-                </label>
-                <select
-                  id="destination"
-                  value={selectedDestination}
-                  onChange={(e) => setSelectedDestination(e.target.value)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                >
-                  <option value="">Select Destination</option>
-                  {destinations.map((dest) => (
-                    <option key={dest} value={dest}>
-                      {dest}
-                    </option>
+          </div>
+
+          {/* Sidebar with additional information */}
+          <div className="col-span-1 space-y-8">
+            {/* Destination Image */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+              <img
+                className="w-full h-48 object-cover"
+                src={new URLSearchParams(location.search).get('image') || '/placeholder.svg'}
+                alt={selectedDestination || 'Vacation destination'}
+              />
+              <div className="p-4">
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-white">{selectedDestination || 'Select a Destination'}</h2>
+                <p className="mt-2 text-gray-600 dark:text-gray-300">
+                  {new URLSearchParams(location.search).get('description') || 'Discover your perfect getaway'}
+                </p>
+              </div>
+            </div>
+
+            {/* Booking Summary */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+              <div className="p-4">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Booking Summary</h3>
+                <div className="space-y-2">
+                  <p className="flex items-center text-gray-600 dark:text-gray-300">
+                    <CalendarIcon className="h-5 w-5 mr-2" />
+                    {checkInDate ? `Check-in: ${checkInDate}` : 'Select check-in date'}
+                  </p>
+                  <p className="flex items-center text-gray-600 dark:text-gray-300">
+                    <CalendarIcon className="h-5 w-5 mr-2" />
+                    {checkOutDate ? `Check-out: ${checkOutDate}` : 'Select check-out date'}
+                  </p>
+                  <p className="flex items-center text-gray-600 dark:text-gray-300">
+                    <UsersIcon className="h-5 w-5 mr-2" />
+                    {`Guests: ${guests}`}
+                  </p>
+                  <p className="flex items-center text-gray-600 dark:text-gray-300">
+                    <BedDoubleIcon className="h-5 w-5 mr-2" />
+                    {roomType ? `Room: ${roomType}` : 'Select room type'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Payment Information */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+              <div className="p-4">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Payment Information</h3>
+                <div className="space-y-2">
+                  <p className="flex items-center text-gray-600 dark:text-gray-300">
+                    <CreditCardIcon className="h-5 w-5 mr-2" />
+                    We accept all major credit cards
+                  </p>
+                  <p className="flex items-center text-gray-600 dark:text-gray-300">
+                    <MapPinIcon className="h-5 w-5 mr-2" />
+                    Free cancellation up to 24 hours before check-in
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Top Destinations */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+              <div className="p-4">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Top Destinations</h3>
+                <ul className="space-y-2">
+                  {destinations.slice(0, 3).map((dest) => (
+                    <li key={dest.name} className="flex items-center justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">{dest.name}</span>
+                      <div className="flex items-center">
+                        <StarIcon className="h-4 w-4 text-yellow-400 mr-1" />
+                        <span className="text-sm text-gray-600 dark:text-gray-300">{dest.rating}</span>
+                      </div>
+                    </li>
                   ))}
-                </select>
+                </ul>
               </div>
-              <div className="mb-4 flex space-x-4">
-                <div className="w-1/2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkIn">
-                    Check-in
-                  </label>
-                  <input
-                    id="checkIn"
-                    type="date"
-                    value={checkInDate}
-                    onChange={(e) => setCheckInDate(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                </div>
-                <div className="w-1/2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkOut">
-                    Check-out
-                  </label>
-                  <input
-                    id="checkOut"
-                    type="date"
-                    value={checkOutDate}
-                    onChange={(e) => setCheckOutDate(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                </div>
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="guests">
-                  Number of Guests
-                </label>
-                <input
-                  id="guests"
-                  type="number"
-                  min="1"
-                  value={guests}
-                  onChange={(e) => setGuests(parseInt(e.target.value))}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-              </div>
-              <div className="mb-6">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="roomType">
-                  Room Type
-                </label>
-                <select
-                  id="roomType"
-                  value={roomType}
-                  onChange={(e) => setRoomType(e.target.value)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                >
-                  <option value="">Select Room Type</option>
-                  <option value="Standard">Standard</option>
-                  <option value="Deluxe">Deluxe</option>
-                  <option value="Suite">Suite</option>
-                </select>
-              </div>
-              <div className="flex items-center justify-between">
-                <button
-                  type="submit"
-                  className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
-                >
-                  Book Now
-                </button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
