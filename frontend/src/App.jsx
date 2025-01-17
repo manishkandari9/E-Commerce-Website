@@ -21,7 +21,7 @@ import BentoCard from './components/page/BentoCard';
 import Footer from './components/page/footer';
 import FooterSkeleton from './Skelton/footer-skeleton';
 import BookingForm from './components/page/Booking';
-import SkeletonLoader from './Skelton/SkeletonLoader';
+import BookingSkeletonLoader from './Skelton/bookingSkeletonLoader';
 function App() {
   return (
     <Router>
@@ -46,7 +46,7 @@ function App() {
           <Route path="/footer" element={<Footer />} />
           <Route path="/footer-skeleton" element={<FooterSkeleton />} />
           <Route path="/booking" element={<BookingForm />} />
-          <Route path="/skeleton-loader" element={<SkeletonLoader />} />
+          <Route path="/Booking-Skeleton-Loader" element={<BookingSkeletonLoader />} />
         </Routes>
       </div>
     </Router>

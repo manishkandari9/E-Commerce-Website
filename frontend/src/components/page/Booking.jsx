@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { CalendarIcon, UsersIcon, BedDoubleIcon, CreditCardIcon, MapPinIcon, StarIcon } from 'lucide-react';
-import SkeletonLoader from '../../Skelton/SkeletonLoader';
+import BookingSkeletonLoader from '../../Skelton/bookingSkeletonLoader';
 
 const BookingPage = () => {
   const location = useLocation();
@@ -53,7 +53,7 @@ const BookingPage = () => {
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Book Your Dream Vacation</h1>
-          <SkeletonLoader />
+          <BookingSkeletonLoader />
         </div>
       </div>
     );
