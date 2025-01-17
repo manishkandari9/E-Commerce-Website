@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, MapPin, Calendar, Users, DollarSign, Star } from "lucide-react";
+import { ChevronRight, MapPin, Calendar, Users, DollarSign, Star } from 'lucide-react';
 import RatingPage from "./RatingPage";
 import { useNavigate } from "react-router-dom";
 
@@ -100,7 +100,7 @@ function DestinationCard({ destination }) {
     >
       {/* Image Section */}
       <div className="relative aspect-video">
-        <img src={destination.image} alt={destination.name} className="w-full h-full object-cover" />
+        <img src={destination.image || "/placeholder.svg"} alt={destination.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <h3 className="text-white font-bold text-xl md:text-2xl">{destination.name}</h3>
@@ -169,7 +169,14 @@ function DestinationCard({ destination }) {
             />
           </button>
           <button
-            onClick={() => navigate("/booking", { state: { destination } })}
+            onClick={() => {
+              const params = new URLSearchParams({
+                destination: destination.name,
+                image: destination.image,
+                description: destination.description
+              });
+              navigate(`/booking?${params.toString()}`);
+            }}
             className="flex-1 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md transition-colors duration-200 flex items-center justify-center"
           >
             <span>Book Now</span>
@@ -239,3 +246,4 @@ export default function ExploreDestinations() {
     </section>
   );
 }
+

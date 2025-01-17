@@ -164,132 +164,132 @@
 // export default Booking
 
 
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 
-const BookingPage = () => {
-  const [destinations, setDestinations] = useState([]);
-  const [selectedDestination, setSelectedDestination] = useState('');
-  const [checkInDate, setCheckInDate] = useState('');
-  const [checkOutDate, setCheckOutDate] = useState('');
-  const [guests, setGuests] = useState(1);
-  const [roomType, setRoomType] = useState('');
+// const BookingPage = () => {
+//   const [destinations, setDestinations] = useState([]);
+//   const [selectedDestination, setSelectedDestination] = useState('');
+//   const [checkInDate, setCheckInDate] = useState('');
+//   const [checkOutDate, setCheckOutDate] = useState('');
+//   const [guests, setGuests] = useState(1);
+//   const [roomType, setRoomType] = useState('');
 
-  useEffect(() => {
-    const fetchDestinations = async () => {
-      // Simulating API call
-      const response = await new Promise(resolve => 
-        setTimeout(() => resolve(['Paris', 'Tokyo', 'New York', 'London', 'Bali', 'Rome']), 1000)
-      );
-      setDestinations(response);
-    };
+//   useEffect(() => {
+//     const fetchDestinations = async () => {
+//       // Simulating API call
+//       const response = await new Promise(resolve => 
+//         setTimeout(() => resolve(['Paris', 'Tokyo', 'New York', 'London', 'Bali', 'Rome']), 1000)
+//       );
+//       setDestinations(response);
+//     };
 
-    fetchDestinations();
-  }, []);
+//     fetchDestinations();
+//   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Booking submitted:', { selectedDestination, checkInDate, checkOutDate, guests, roomType });
-    // Here you would typically make an API call to submit the booking
-  };
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     console.log('Booking submitted:', { selectedDestination, checkInDate, checkOutDate, guests, roomType });
+//     // Here you would typically make an API call to submit the booking
+//   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-        <div className="md:flex">
-          <div className="md:flex-shrink-0">
-            <img className="h-48 w-full object-cover md:w-48" src="/placeholder.svg?height=400&width=300" alt="Vacation destination" />
-          </div>
-          <div className="p-8">
-            <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Book Your Dream Vacation</div>
-            <form onSubmit={handleSubmit} className="mt-6">
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="destination">
-                  Destination
-                </label>
-                <select
-                  id="destination"
-                  value={selectedDestination}
-                  onChange={(e) => setSelectedDestination(e.target.value)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                >
-                  <option value="">Select Destination</option>
-                  {destinations.map((dest) => (
-                    <option key={dest} value={dest}>{dest}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="mb-4 flex space-x-4">
-                <div className="w-1/2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkIn">
-                    Check-in
-                  </label>
-                  <input
-                    id="checkIn"
-                    type="date"
-                    value={checkInDate}
-                    onChange={(e) => setCheckInDate(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                </div>
-                <div className="w-1/2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkOut">
-                    Check-out
-                  </label>
-                  <input
-                    id="checkOut"
-                    type="date"
-                    value={checkOutDate}
-                    onChange={(e) => setCheckOutDate(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                </div>
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="guests">
-                  Number of Guests
-                </label>
-                <input
-                  id="guests"
-                  type="number"
-                  min="1"
-                  value={guests}
-                  onChange={(e) => setGuests(e.target.value)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-              </div>
-              <div className="mb-6">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="roomType">
-                  Room Type
-                </label>
-                <select
-                  id="roomType"
-                  value={roomType}
-                  onChange={(e) => setRoomType(e.target.value)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                >
-                  <option value="">Select Room Type</option>
-                  <option value="Standard">Standard</option>
-                  <option value="Deluxe">Deluxe</option>
-                  <option value="Suite">Suite</option>
-                </select>
-              </div>
-              <div className="flex items-center justify-between">
-                <button
-                  type="submit"
-                  className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
-                >
-                  Book Now
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+//       <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+//         <div className="md:flex">
+//           <div className="md:flex-shrink-0">
+//             <img className="h-48 w-full object-cover md:w-48" src="/placeholder.svg?height=400&width=300" alt="Vacation destination" />
+//           </div>
+//           <div className="p-8">
+//             <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Book Your Dream Vacation</div>
+//             <form onSubmit={handleSubmit} className="mt-6">
+//               <div className="mb-4">
+//                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="destination">
+//                   Destination
+//                 </label>
+//                 <select
+//                   id="destination"
+//                   value={selectedDestination}
+//                   onChange={(e) => setSelectedDestination(e.target.value)}
+//                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+//                 >
+//                   <option value="">Select Destination</option>
+//                   {destinations.map((dest) => (
+//                     <option key={dest} value={dest}>{dest}</option>
+//                   ))}
+//                 </select>
+//               </div>
+//               <div className="mb-4 flex space-x-4">
+//                 <div className="w-1/2">
+//                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkIn">
+//                     Check-in
+//                   </label>
+//                   <input
+//                     id="checkIn"
+//                     type="date"
+//                     value={checkInDate}
+//                     onChange={(e) => setCheckInDate(e.target.value)}
+//                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+//                   />
+//                 </div>
+//                 <div className="w-1/2">
+//                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkOut">
+//                     Check-out
+//                   </label>
+//                   <input
+//                     id="checkOut"
+//                     type="date"
+//                     value={checkOutDate}
+//                     onChange={(e) => setCheckOutDate(e.target.value)}
+//                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+//                   />
+//                 </div>
+//               </div>
+//               <div className="mb-4">
+//                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="guests">
+//                   Number of Guests
+//                 </label>
+//                 <input
+//                   id="guests"
+//                   type="number"
+//                   min="1"
+//                   value={guests}
+//                   onChange={(e) => setGuests(e.target.value)}
+//                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+//                 />
+//               </div>
+//               <div className="mb-6">
+//                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="roomType">
+//                   Room Type
+//                 </label>
+//                 <select
+//                   id="roomType"
+//                   value={roomType}
+//                   onChange={(e) => setRoomType(e.target.value)}
+//                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+//                 >
+//                   <option value="">Select Room Type</option>
+//                   <option value="Standard">Standard</option>
+//                   <option value="Deluxe">Deluxe</option>
+//                   <option value="Suite">Suite</option>
+//                 </select>
+//               </div>
+//               <div className="flex items-center justify-between">
+//                 <button
+//                   type="submit"
+//                   className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+//                 >
+//                   Book Now
+//                 </button>
+//               </div>
+//             </form>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
-export default BookingPage;
+// export default BookingPage;
 
 
 // import React, { useState, useEffect } from 'react';
@@ -459,4 +459,153 @@ export default BookingPage;
 // };
 
 // export default BookingPage;
+
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+const BookingPage = () => {
+  const location = useLocation();
+  const [destinations, setDestinations] = useState([]);
+  const [selectedDestination, setSelectedDestination] = useState('');
+  const [checkInDate, setCheckInDate] = useState('');
+  const [checkOutDate, setCheckOutDate] = useState('');
+  const [guests, setGuests] = useState(1);
+  const [roomType, setRoomType] = useState('');
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const destination = searchParams.get('destination');
+    const image = searchParams.get('image');
+    const description = searchParams.get('description');
+
+    if (destination) {
+      setSelectedDestination(destination);
+    }
+
+    // Simulating API call to fetch destinations
+    const fetchDestinations = async () => {
+      const response = await new Promise((resolve) =>
+        setTimeout(() => resolve(['Paris', 'Tokyo', 'New York', 'London', 'Bali', 'Rome']), 1000)
+      );
+      setDestinations(response);
+    };
+
+    fetchDestinations();
+  }, [location.search]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Booking submitted:', { selectedDestination, checkInDate, checkOutDate, guests, roomType });
+    // Here you would typically make an API call to submit the booking
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+        <div className="md:flex">
+          <div className="md:flex-shrink-0">
+            <img
+              className="h-48 w-full object-cover md:w-48"
+              src={new URLSearchParams(location.search).get('image') || '/placeholder.svg'}
+              alt={selectedDestination || 'Vacation destination'}
+            />
+          </div>
+          <div className="p-8">
+            <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+              {selectedDestination ? `Book Your Dream Vacation to ${selectedDestination}` : 'Book Your Dream Vacation'}
+            </div>
+            <p className="text-gray-700 text-base mt-2">
+              {new URLSearchParams(location.search).get('description') || 'Plan your next getaway with ease. Select your preferences below!'}
+            </p>
+            <form onSubmit={handleSubmit} className="mt-6">
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="destination">
+                  Destination
+                </label>
+                <select
+                  id="destination"
+                  value={selectedDestination}
+                  onChange={(e) => setSelectedDestination(e.target.value)}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                >
+                  <option value="">Select Destination</option>
+                  {destinations.map((dest) => (
+                    <option key={dest} value={dest}>
+                      {dest}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-4 flex space-x-4">
+                <div className="w-1/2">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkIn">
+                    Check-in
+                  </label>
+                  <input
+                    id="checkIn"
+                    type="date"
+                    value={checkInDate}
+                    onChange={(e) => setCheckInDate(e.target.value)}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <div className="w-1/2">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="checkOut">
+                    Check-out
+                  </label>
+                  <input
+                    id="checkOut"
+                    type="date"
+                    value={checkOutDate}
+                    onChange={(e) => setCheckOutDate(e.target.value)}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="guests">
+                  Number of Guests
+                </label>
+                <input
+                  id="guests"
+                  type="number"
+                  min="1"
+                  value={guests}
+                  onChange={(e) => setGuests(parseInt(e.target.value))}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
+              <div className="mb-6">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="roomType">
+                  Room Type
+                </label>
+                <select
+                  id="roomType"
+                  value={roomType}
+                  onChange={(e) => setRoomType(e.target.value)}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                >
+                  <option value="">Select Room Type</option>
+                  <option value="Standard">Standard</option>
+                  <option value="Deluxe">Deluxe</option>
+                  <option value="Suite">Suite</option>
+                </select>
+              </div>
+              <div className="flex items-center justify-between">
+                <button
+                  type="submit"
+                  className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+                >
+                  Book Now
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BookingPage;
 
