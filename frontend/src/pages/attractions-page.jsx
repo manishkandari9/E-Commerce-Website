@@ -4,6 +4,7 @@ import { Heart, Clock, MapPin, DollarSign, Accessibility, Search, Tag, Users, Ch
 import AttractionsSkeleton from "../Skelton/attractions-skeleton"
 import { useNavigate } from "react-router-dom"
 
+
 // Simulated API call
 async function getAttractions(category) {
   await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulating API delay
@@ -28,7 +29,7 @@ async function getAttractions(category) {
       name: "Nature Reserve Hike",
       description:
         "Experience the beauty of local flora and fauna on a guided hike. Traverse scenic trails and learn about the ecosystem from expert naturalists.",
-      image: "/aarti.jpg?height=400&width=300",
+        image: "/assets/Images/dharidevi.jpg?height=400&width=300",
       category: "adventure",
       entryFee: 10,
       hours: "Sunrise to Sunset",
