@@ -5,8 +5,8 @@ import BookingSkeletonLoader from '../../Skelton/bookingSkeletonLoader';
 
 const BookingPage = () => {
   const location = useLocation();
-  const [destinations, setDestinations] = useState([]);
-  const [selectedDestination, setSelectedDestination] = useState('');
+  const [destinations, setDestinations] = useState([]);  // New destinations for loading
+  const [selectedDestination, setSelectedDestination] = useState(''); // From the URL params
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
   const [guests, setGuests] = useState(1);
@@ -15,6 +15,8 @@ const BookingPage = () => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
+    
+    // Fetching the query parameters (destination, image, description)
     const destination = searchParams.get('destination');
     const image = searchParams.get('image');
     const description = searchParams.get('description');
@@ -23,7 +25,7 @@ const BookingPage = () => {
       setSelectedDestination(destination);
     }
 
-    // Simulating API call to fetch destinations
+    // Simulating an API call to get new destinations
     const fetchDestinations = async () => {
       const response = await new Promise((resolve) =>
         setTimeout(() => resolve([
@@ -33,19 +35,18 @@ const BookingPage = () => {
           { name: 'London', rating: 4.6, price: '$190' },
           { name: 'Bali', rating: 4.5, price: '$150' },
           { name: 'Rome', rating: 4.7, price: '$170' }
-        ]), 2000) // Increased timeout to 2 seconds to show the skeleton loader
+        ]), 2000)
       );
-      setDestinations(response);
-      setLoading(false);
+      setDestinations(response); // Updating destinations
+      setLoading(false); // Stop loading
     };
 
-    fetchDestinations();
+    fetchDestinations(); // Call to fetch new destinations
   }, [location.search]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Booking submitted:', { selectedDestination, checkInDate, checkOutDate, guests, roomType });
-    // Here you would typically make an API call to submit the booking
   };
 
   if (loading) {
@@ -195,23 +196,6 @@ const BookingPage = () => {
               </div>
             </div>
 
-            {/* Payment Information */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Payment Information</h3>
-                <div className="space-y-2">
-                  <p className="flex items-center text-gray-600 dark:text-gray-300">
-                    <CreditCardIcon className="h-5 w-5 mr-2" />
-                    We accept all major credit cards
-                  </p>
-                  <p className="flex items-center text-gray-600 dark:text-gray-300">
-                    <MapPinIcon className="h-5 w-5 mr-2" />
-                    Free cancellation up to 24 hours before check-in
-                  </p>
-                </div>
-              </div>
-            </div>
-
             {/* Top Destinations */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
               <div className="p-4">
@@ -237,4 +221,3 @@ const BookingPage = () => {
 };
 
 export default BookingPage;
-
