@@ -22,6 +22,7 @@ import Footer from './components/page/footer';
 import FooterSkeleton from './Skelton/footer-skeleton';
 import BookingForm from './components/page/Booking';
 import BookingSkeletonLoader from './Skelton/bookingSkeletonLoader';
+import SmartItineraryGenerator from './pages/smart-itinerary-generator';
 function App() {
   return (
     <Router>
@@ -47,6 +48,7 @@ function App() {
           <Route path="/footer-skeleton" element={<FooterSkeleton />} />
           <Route path="/booking" element={<BookingForm />} />
           <Route path="/Booking-Skeleton-Loader" element={<BookingSkeletonLoader />} />
+          <Route path="/smart-itinerary-generator" element={<SmartItineraryGenerator />} />
         </Routes>
       </div>
     </Router>
