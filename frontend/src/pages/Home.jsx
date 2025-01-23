@@ -343,7 +343,7 @@ export default function HeroSection() {
       <TourismGallery/>
       <TourismSection/>
       <InteractiveGlobeSection/>
-      <InteractiveMapSection/>
+      <SmartItineraryGenerator/>
       <ContactPage/>
       <Footer />
     </>
