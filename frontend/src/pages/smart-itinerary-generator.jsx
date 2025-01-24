@@ -1,165 +1,278 @@
 "use client";
+import React from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Loader2, Plane, Hotel, Utensils, Camera, MapPin, Calendar, DollarSign, List } from "lucide-react";
 
-import React, { useState } from "react";
+const Button = ({ children, className, ...props }) => (
+  <button
+    className={`px-4 py-2 rounded-md text-white font-bold ${className}`}
+    {...props}
+  >
+    {children}
+  </button>
+);
+
+const Input = ({ className, ...props }) => (
+  <input
+    className={`border border-gray-300 rounded-md px-4 py-2 w-full ${className}`}
+    {...props}
+  />
+);
+
+const Textarea = ({ className, ...props }) => (
+  <textarea
+    className={`border border-gray-300 rounded-md px-4 py-2 w-full ${className}`}
+    {...props}
+  />
+);
+
+const Card = ({ children, className }) => (
+  <div className={`rounded-lg shadow-md ${className}`}>{children}</div>
+);
+
+const CardHeader = ({ children, className }) => (
+  <div className={`p-4 rounded-t-lg ${className}`}>{children}</div>
+);
+
+const CardTitle = ({ children, className }) => (
+  <h2 className={`text-lg font-bold ${className}`}>{children}</h2>
+);
+
+const CardDescription = ({ children, className }) => (
+  <p className={`text-sm ${className}`}>{children}</p>
+);
+
+const CardContent = ({ children, className }) => (
+  <div className={`p-4 ${className}`}>{children}</div>
+);
+
+const Tabs = ({ children, className, defaultValue }) => {
+  const [activeTab, setActiveTab] = useState(defaultValue);
+
+  return (
+    <div className={className}>
+      {React.Children.map(children, (child) => {
+        if (child.type === TabsList) {
+          return React.cloneElement(child, { activeTab, setActiveTab });
+        }
+        if (child.type === TabsContent) {
+          return React.cloneElement(child, { activeTab });
+        }
+        return child;
+      })}
+    </div>
+  );
+};
+
+const TabsList = ({ children, activeTab, setActiveTab }) => (
+  <div className="flex">
+    {React.Children.map(children, (child) =>
+      React.cloneElement(child, { activeTab, setActiveTab })
+    )}
+  </div>
+);
+
+const TabsTrigger = ({ children, value, activeTab, setActiveTab }) => (
+  <button
+    onClick={() => setActiveTab(value)}
+    className={`px-4 py-2 border-b-2 ${
+      activeTab === value ? "border-indigo-500" : "border-transparent"
+    }`}
+  >
+    {children}
+  </button>
+);
+
+const TabsContent = ({ children, value, activeTab }) =>
+  activeTab === value ? <div>{children}</div> : null;
 
 export default function SmartItineraryGenerator() {
   const [destination, setDestination] = useState("");
   const [duration, setDuration] = useState("");
   const [preferences, setPreferences] = useState("");
+  const [budget, setBudget] = useState("");
   const [itinerary, setItinerary] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
 
-    // Simulate API call with setTimeout
-    setTimeout(() => {
-      const generatedItinerary = `
-        <h3 class="text-xl font-semibold mb-2">Your ${duration}-day trip to ${destination}</h3>
-        <p class="mb-4">Based on your preferences: ${preferences}</p>
-        <ul class="list-disc pl-5 space-y-2">
-          <li>Day 1: Arrival and city tour</li>
-          <li>Day 2: Visit to local attractions</li>
-          <li>Day 3: Day trip to nearby landmarks</li>
-          ${
-            Number(duration) > 3
-              ? `<li>Day 4: Free day for ${preferences || "relaxation and exploration"}</li>`
-              : ""
-          }
-          ${
-            Number(duration) > 4
-              ? `<li>Day 5: Departure and souvenir shopping</li>`
-              : ""
-          }
-        </ul>
-      `;
+    try {
+      const generatedItinerary = await generateItinerary(destination, duration, preferences, budget);
       setItinerary(generatedItinerary);
+    } catch (err) {
+      setError("Failed to generate itinerary. Please try again.");
+      console.error(err);
+    } finally {
       setIsLoading(false);
-    }, 2000); // Simulate 2-second delay
+    }
   };
 
   return (
-    <div className="container mx-auto p-4 bg-gray-50 min-h-screen">
-      <h1 className="text-4xl font-bold text-center mb-8 text-indigo-600">
+    <div className="container mx-auto p-4 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+      <motion.h1
+        className="text-5xl font-bold text-center mb-8 text-indigo-800"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         Smart Travel Itinerary Generator
-      </h1>
-      <div className="grid md:grid-cols-2 gap-8">
-        {/* Travel Preferences Form */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="p-6 bg-gradient-to-r from-indigo-500 to-purple-600">
-            <h2 className="text-2xl font-semibold text-white">Your Travel Preferences</h2>
-            <p className="text-indigo-100 mt-2">Tell us about your dream vacation</p>
-          </div>
-          <div className="p-6">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Destination Field */}
-              <div>
-                <label
-                  htmlFor="destination"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+      </motion.h1>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <motion.div
+          className="lg:col-span-2"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <Card className="bg-white/80 backdrop-blur-sm shadow-xl">
+            <CardHeader className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+              <CardTitle>Your Travel Preferences</CardTitle>
+              <CardDescription>Design your dream vacation</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="flex items-center space-x-2">
+                  <MapPin className="text-indigo-500" />
+                  <Input
+                    value={destination}
+                    onChange={(e) => setDestination(e.target.value)}
+                    placeholder="Destination"
+                    required
+                  />
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Calendar className="text-indigo-500" />
+                  <Input
+                    type="number"
+                    value={duration}
+                    onChange={(e) => setDuration(e.target.value)}
+                    placeholder="Duration (days)"
+                    required
+                    min="1"
+                  />
+                </div>
+                <div className="flex items-center space-x-2">
+                  <List className="text-indigo-500" />
+                  <Textarea
+                    value={preferences}
+                    onChange={(e) => setPreferences(e.target.value)}
+                    placeholder="Travel Preferences"
+                    rows={4}
+                  />
+                </div>
+                <div className="flex items-center space-x-2">
+                  <DollarSign className="text-indigo-500" />
+                  <Input
+                    type="number"
+                    value={budget}
+                    onChange={(e) => setBudget(e.target.value)}
+                    placeholder="Budget (USD)"
+                    min="0"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-indigo-600 hover:bg-indigo-700"
+                  disabled={isLoading}
                 >
-                  Destination
-                </label>
-                <input
-                  id="destination"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
-                  placeholder="e.g., Paris, Tokyo, New York"
-                  required
-                />
-              </div>
-              {/* Duration Field */}
-              <div>
-                <label
-                  htmlFor="duration"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Duration (days)
-                </label>
-                <input
-                  id="duration"
-                  type="number"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  value={duration}
-                  onChange={(e) => setDuration(e.target.value)}
-                  placeholder="e.g., 5"
-                  required
-                  min="1"
-                />
-              </div>
-              {/* Preferences Field */}
-              <div>
-                <label
-                  htmlFor="preferences"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Travel Preferences
-                </label>
-                <textarea
-                  id="preferences"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  value={preferences}
-                  onChange={(e) => setPreferences(e.target.value)}
-                  placeholder="e.g., love art museums, enjoy local cuisine, prefer outdoor activities"
-                  rows={4}
-                />
-              </div>
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className={`w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out ${
-                  isLoading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <span className="flex items-center justify-center">
-                    <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Generating...
-                  </span>
-                ) : (
-                  "Generate Itinerary"
-                )}
-              </button>
-            </form>
-          </div>
-        </div>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Crafting your journey...
+                    </>
+                  ) : (
+                    "Generate Itinerary"
+                  )}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-        {/* Generated Itinerary Display */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="p-6 bg-gradient-to-r from-green-500 to-teal-600">
-            <h2 className="text-2xl font-semibold text-white">Your Personalized Itinerary</h2>
-            <p className="text-green-100 mt-2">AI-generated travel plan based on your preferences</p>
-          </div>
-          <div className="p-6">
-            {itinerary ? (
-              <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: itinerary }} />
-            ) : (
-              <p className="text-gray-500 italic">Your itinerary will appear here once generated.</p>
-            )}
-          </div>
-        </div>
+        <motion.div
+          className="lg:row-span-2"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <Card className="bg-white/80 backdrop-blur-sm shadow-xl h-full">
+            <CardHeader className="bg-gradient-to-r from-purple-600 to-pink-500 text-white">
+              <CardTitle>Your Personalized Itinerary</CardTitle>
+              <CardDescription>AI-crafted travel plan</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6 overflow-auto max-h-[calc(100vh-20rem)]">
+              {error && <p className="text-red-500 mb-4">{error}</p>}
+              {itinerary ? (
+                <div
+                  className="prose max-w-none"
+                  dangerouslySetInnerHTML={{ __html: itinerary }}
+                />
+              ) : (
+                <p className="text-gray-500 italic text-center">
+                  Your adventure awaits! Generate an itinerary to see it here.
+                </p>
+              )}
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <Tabs defaultValue="tips" className="w-full">
+            <TabsList>
+              <TabsTrigger value="tips">Travel Tips</TabsTrigger>
+              <TabsTrigger value="weather">Weather</TabsTrigger>
+            </TabsList>
+            <TabsContent value="tips">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Smart Travel Tips</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    <li className="flex items-center text-sm">
+                      <Plane className="mr-2 h-4 w-4 text-indigo-500" /> Book
+                      flights in advance for better deals
+                    </li>
+                    <li className="flex items-center text-sm">
+                      <Hotel className="mr-2 h-4 w-4 text-indigo-500" /> Compare
+                      hotel prices across multiple platforms
+                    </li>
+                    <li className="flex items-center text-sm">
+                      <Utensils className="mr-2 h-4 w-4 text-indigo-500" />{" "}
+                      Research local cuisines and must-try dishes
+                    </li>
+                    <li className="flex items-center text-sm">
+                      <Camera className="mr-2 h-4 w-4 text-indigo-500" /> Pack a
+                      portable charger for your devices
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="weather">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Weather Forecast</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center text-sm text-gray-500">
+                    Enter a destination to see the weather forecast.
+                  </p>
+                  {/* Weather component would go here */}
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </motion.div>
       </div>
     </div>
   );
