@@ -368,7 +368,7 @@ const blogPosts = [
     date: "March 22, 2023",
     category: "Art & Culture",
     excerpt: "Take a visual journey through our city's vibrant street art scene and the stories behind the murals.",
-    images: ["/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400"]
+    images: ["/aarti .jpg?height=300&width=400", "/aarti .jpg?height=300&width=400", "/aarti .jpg?height=300&width=400"]
   },
   {
     title: "Family-Friendly Attractions",
@@ -376,7 +376,7 @@ const blogPosts = [
     date: "March 5, 2023",
     category: "Family Travel",
     excerpt: "Plan the perfect family vacation with our guide to kid-friendly attractions and activities.",
-    images: ["/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400"]
+    images: ["/bungeer.jpg?height=300&width=400", "/bungeer.jpg?height=300&width=400", "/bungeer.jpg?height=300&width=400"]
   }
 ]
 
