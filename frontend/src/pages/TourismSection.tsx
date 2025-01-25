@@ -336,7 +336,7 @@ const blogPosts = [
     date: "June 1, 2023",
     category: "Travel Tips",
     excerpt: "Discover the lesser-known attractions that make our city unique and unforgettable.",
-    images: ["/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400"]
+    images: ["/dha.png?height=300&width=400", "/dev.jpg?height=300&width=400", "/dha.png?height=300&width=400"]
   },
   {
     title: "Best Seasons to Visit",
@@ -344,7 +344,7 @@ const blogPosts = [
     date: "May 15, 2023",
     category: "Seasonal Advice",
     excerpt: "Plan your trip with our guide to the best times to visit for different activities and experiences.",
-    images: ["/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400"]
+    images: ["/camping.jpg?height=300&width=400", "/camping.jpg?height=300&width=400", "/camping.jpg?height=300&width=400"]
   },
   {
     title: "Local Cuisine: A Foodie's Guide",
@@ -352,7 +352,7 @@ const blogPosts = [
     date: "April 28, 2023",
     category: "Food & Drink",
     excerpt: "Explore the flavors of our region with this comprehensive guide to local dishes and restaurants.",
-    images: ["/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400"]
+    images: ["/camping.jpg?height=300&width=400", "/camping.jpg?height=300&width=400", "/camping.jpg?height=300&width=400"]
   },
   {
     title: "Outdoor Adventures: Hiking Trails",
