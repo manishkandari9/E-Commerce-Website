@@ -22,8 +22,8 @@ const experiences = [
     color: "from-green-500 to-emerald-600",
   },
   {
-    title: "Rajasthan Desert Camel Trek",
-    description: "Journey through the golden sands of Rajasthan on a traditional camel trek. Experience the romance of desert nights and the hospitality of local communities.",
+    title: "Rajasthan Desert Camel Treks",
+    description: "Journey through the goldens sands of Rajasthan on a traditional camel trek. Experience the romance of desert nights and the hospitality of local communities.",
     image: "/dha.png",
     color: "from-yellow-400 to-amber-500",
   },
@@ -35,7 +35,7 @@ export default function Featured() {
   return (
     <section className="py-20 bg-gray-100 dark:bg-gradient-to-r dark:from-black dark:via-gray-900 dark:to-black">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12 text-black dark:text-white">Featured Experiences</h2>
+        <h2 className="text-4xl font-bold text-center mb-12 text-black dark:text-white">Features Experiences</h2>
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="lg:w-1/2">
             <div className="relative h-[600px] overflow-hidden rounded-xl shadow-2xl">
@@ -63,7 +63,7 @@ export default function Featured() {
           </div>
           <div className="lg:w-1/2">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8">
-              <h3 className="text-2xl font-semibold mb-6 text-black dark:text-white">Choose Your Adventure</h3>
+              <h3 className="text-2xl font-semibold mb-6 text-black dark:text-white">Choose Your Adventures</h3>
               {experiences.map((exp, index) => (
                 <motion.div
                   key={index}
@@ -98,7 +98,7 @@ export default function Featured() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Book Your Experience
+                Books Your Experiences
               </motion.button>
             </div>
           </div>

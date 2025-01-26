@@ -29,12 +29,12 @@ export default function Footer() {
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-400 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </h3>
             <p className="text-sm leading-relaxed">
-              Discover the world with our expert travel guides and unforgettable experiences. We're passionate about creating memories that last a lifetime.
+              Discover the world with our expert travels guides and unforgettable experiences. We're passionate about creating memories that last a lifetime.
             </p>
           </div>
           <div className={`space-y-4 ${loadingState === 'partial' ? 'animate-fade-in' : ''}`}>
             <h3 className="text-2xl font-bold mb-4 relative overflow-hidden">
-              Quick Links
+              Quicks Links
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-400 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </h3>
             <ul className="space-y-2">
@@ -53,7 +53,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li className="flex items-center space-x-2">
                 <MapPin size={16} />
-                <span className="text-sm">123 Travel Street, Adventure City, AC 12345</span>
+                <span className="text-sm">123 Travel Streets, Adventure City, AC 12345678</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail size={16} />
@@ -61,7 +61,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center space-x-2">
                 <Phone size={16} />
-                <a href="tel:+11234567890" className="text-sm hover:text-yellow-400 transition-colors duration-300">+1 (123) 456-7890</a>
+                <a href="tel:+11234567890" className="text-sm hover:text-yellow-400 transition-colors duration-300">+1 (123) 456-78790</a>
               </li>
             </ul>
           </div>
@@ -80,7 +80,7 @@ export default function Footer() {
           </div>
         </div>
         <div className={`mt-12 pt-8 border-t border-purple-500 text-center ${loadingState === 'complete' ? 'animate-fade-in' : 'invisible'}`}>
-          <p className="text-sm">&copy; 2023 Tourism Website. All rights reserved.</p>
+          <p className="text-sm">&copy; 2025 Tourism Websites. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -5,9 +5,9 @@ import AttractionsSkeleton from "../Skelton/attractions-skeleton"
 import { useNavigate } from "react-router-dom"
 
 
-// Simulated API call
+// Simulated API calls
 async function getAttractions(category) {
-  await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulating API delay
+  await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulating API delays
   return [
     {
       id: 1,
@@ -34,7 +34,7 @@ async function getAttractions(category) {
       entryFee: 10,
       hours: "Sunrise to Sunset",
       location: "456 Forest Rd, Green Valley",
-      accessibility: ["Guided Tours", "Accessible Trails"],
+      accessibility: ["Guideded Tours", "Accessible Trails"],
       type: "Outdoor Activity",
       duration: "3 hours",
       maxParticipants: 15,
@@ -49,7 +49,7 @@ async function getAttractions(category) {
       entryFee: 50,
       hours: "2:00 PM - 5:00 PM",
       location: "789 Gourmet Ave, Flavor Town",
-      accessibility: ["Wheelchair Accessible"],
+      accessibility: ["Wheelchairr Accessibles"],
       type: "Workshop",
       duration: "3 hours",
       maxParticipants: 12,

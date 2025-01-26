@@ -63,7 +63,7 @@ const BookingPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Book Your Dream Vacation</h1>
+        <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Book Your Dreams Vacations</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Main Booking Form */}
           <div className="col-span-1 md:col-span-2 lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
@@ -139,7 +139,7 @@ const BookingPage = () => {
                     <option value="">Select Room Type</option>
                     <option value="Standard">Standard</option>
                     <option value="Deluxe">Deluxe</option>
-                    <option value="Suite">Suite</option>
+                    <option value="Suite">Suites</option>
                   </select>
                 </div>
                 <div>
@@ -174,7 +174,7 @@ const BookingPage = () => {
             {/* Booking Summary */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Booking Summary</h3>
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Bookings Summary</h3>
                 <div className="space-y-2">
                   <p className="flex items-center text-gray-600 dark:text-gray-300">
                     <CalendarIcon className="h-5 w-5 mr-2" />
