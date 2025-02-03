@@ -10,6 +10,7 @@ import ContactPage from './contact-page';
 import InteractiveGlobeSection from './interactive-globe-section';
 import Footer from '../components/page/footer';
 import SmartItineraryGenerator from './smart-itinerary-generator';
+import CurrencyTransfer from '../components/page/currency-transfer';
 import SkeletonLoader, { SkeletonText, SkeletonTitle, SkeletonButton, SkeletonImage } from '../Skelton/SkeletonLoader';
 
 function Button({ variant, className, children, ...props }) {
@@ -345,6 +346,7 @@ export default function HeroSection() {
       <InteractiveGlobeSection/>
       <SmartItineraryGenerator/>
       <ContactPage/>
+      <CurrencyTransfer/>
       <Footer />
     </>
   );
