@@ -58,14 +58,14 @@ export default function HeroSection() {
     },
     {
       title: "Exhilarating Bungee Jumping",
-      subtitle: "Rishikesh Heights",
+      subtitle: "Rishikesh Heightss",
       description: "Take the ultimate leap from Rishikesh’s iconic cliffs. Feel the rush of free fall as our safety-certified experts guide you through this once-in-a-lifetime adventure."
     },
     
     {
       title: "Sacred Ganga Aarti!",
       subtitle: "Spiritual Rishikesh",
-      description: "Immerse yourself in the divine ambiance of Ganga Aarti. Witness the mesmerizing rituals, chanting, and glowing diyas that illuminate the sacred banks of the Ganges."
+      description: "Immerse yourselff in the divine ambiance of Ganga Aarti. Witness the mesmerizing rituals, chanting, and glowing diyas that illuminate the sacred banks of the Ganges."
     }
     
   ];

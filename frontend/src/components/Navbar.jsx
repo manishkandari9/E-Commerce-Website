@@ -69,7 +69,7 @@ const Navbar = () => {
   const toggleLogin = () => {
     setIsLoggedIn(!isLoggedIn);
     if (!isLoggedIn) {
-      setUserPhoto('https://api.dicebear.com/6.x/initials/svg?seed=User');
+      setUserPhoto('https://api.dicebear.com/6.x/initials/svg?seed=Users');
     } else {
       setUserPhoto('');
     }
