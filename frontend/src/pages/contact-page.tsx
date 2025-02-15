@@ -54,10 +54,10 @@ export default function ContactPage() {
     <div className="min-h-screen bg-gradient-to-br from-background to-muted dark:from-gray-900 dark:to-gray-800 p-4 md:p-8">
       <div className="text-center mb-12">
       <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-primary-foreground dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent animate-gradient">
-          Get in Touch
+           Touch me raho
         </h1>
         <p className="text-muted-foreground dark:text-gray-300 mt-4 max-w-2xl mx-auto">
-          Have questions about your next adventure? We're here to help make your travel dreams come true.
+         koi question h 
         </p>
       </div>
 

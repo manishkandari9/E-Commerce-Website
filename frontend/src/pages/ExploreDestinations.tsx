@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const destinations = [
   {
-    name: "Taj Mahal, Agra",
-    description: "Marvel at the iconic symbol of love, a UNESCO World Heritage site and one of the New Seven Wonders of the World.",
+    name: "kunjapuri ",
+    description: "",
     image: "/kun.jpg",
     details: {
       duration: "1-2 days",
@@ -18,8 +18,8 @@ const destinations = [
     rating: 4.9,
   },
   {
-    name: "Varanasi Ghats",
-    description: "Experience the spiritual heart of India with ancient rituals and mesmerizing Ganga Aarti on the banks of the holy Ganges.",
+    name: "dhari devi",
+    description: "",
     image: "/dha.png",
     details: {
       duration: "2-3 days",
@@ -30,8 +30,8 @@ const destinations = [
     rating: 4.7,
   },
   {
-    name: "Jaipur Pink City",
-    description: "Explore the majestic forts and palaces of Rajasthan's capital, known for its distinctive pink architecture.",
+    name: "devpryag",
+    description: "",
     image: "/dev.jpg",
     details: {
       duration: "3-4 days",
@@ -42,8 +42,8 @@ const destinations = [
     rating: 4.8,
   },
   {
-    name: "Kerala Backwaters",
-    description: "Cruise through serene waterways, lush paddy fields, and experience the unique culture of God's Own Country.",
+    name: "Kunjapuri",
+    description: "kunjapuri.",
     image: "/kun.jpg",
     details: {
       duration: "2-3 days",
@@ -53,21 +53,21 @@ const destinations = [
     price: "₹3,000",
     rating: 4.9,
   },
+  // {
+  //   name: "dhari devi",
+  //   description: "dhari devi.",
+  //   image: "/dha.png",
+  //   details: {
+  //     duration: "7-10 days",
+  //     bestTime: "June to September",
+  //     groupSize: "Small groups",
+  //   },
+  //   price: "₹5,000",
+  //   rating: 4.8,
+  // },
   {
-    name: "Ladakh Himalayan Retreat",
-    description: "Discover breathtaking landscapes, ancient monasteries, and the unique Tibetan-influenced culture of this high-altitude desert.",
-    image: "/dha.png",
-    details: {
-      duration: "7-10 days",
-      bestTime: "June to September",
-      groupSize: "Small groups",
-    },
-    price: "₹5,000",
-    rating: 4.8,
-  },
-  {
-    name: "Goa Beaches",
-    description: "Relax on golden beaches, indulge in water sports, and experience the vibrant nightlife of India's favorite coastal destination.",
+    name: "dhari devi",
+    description: "dhari devi.",
     image: "/dha.png",
     details: {
       duration: "4-5 days",
@@ -229,7 +229,7 @@ export default function ExploreDestinations() {
     <section className="py-12 bg-gray-100 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800 dark:text-white">
-          Explore Incredible India
+          Explore places
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence>

@@ -11,7 +11,7 @@ async function getAttractions(category) {
   return [
     {
       id: 1,
-      name: "Historical Museum Tour",
+      name: "",
       description:
         "Explore the rich history of our region with a guided tour. Discover ancient artifacts, interactive exhibits, and fascinating stories from the past.",
       image: "/dev.jpg?height=300&width=400",
