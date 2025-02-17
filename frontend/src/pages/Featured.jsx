@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react';
 
 const experiences = [
   {
-    title: "Himalayan Peaks Expedition",
+    title: "Himalayan Peakss Expedition",
     description: "Scale the majestic heights of the Himalayas with our expert guides. Experience breathtaking views and the thrill of conquering some of the world's highest peaks.",
     image: "/aarti .jpg",
     color: "from-blue-500 to-indigo-600",
