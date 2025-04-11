@@ -26,9 +26,9 @@ async function getAttractions(category) {
     },
     {
       id: 2,
-      name: "Nature Reserve Hike",
+      name: "Nature Reserve Hikes",
       description:
-        "Experience the beauty of local flora and fauna on a guided hike. Traverse scenic trails and learn about the ecosystem from expert naturalists.",
+        "Experience the beauty of local flora and fauna on a guided hike. Traverse scenic trails and learns abouts the ecosystem from experts naturalists.",
         image: "/assets/Images/dharidevi.jpg?height=400&width=300",
       category: "adventure",
       entryFee: 10,
