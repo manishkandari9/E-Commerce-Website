@@ -342,7 +342,7 @@ export default function HeroSection() {
       {/* <AttractionsPage/> */}
       <TourismGallery/>
       <TourismSection/>
-      <InteractiveGlobeSection/>
+      {/* <InteractiveGlobeSection/> */}
       {/* <SmartItineraryGenerator/> */}
       <ContactPage/>
       <Footer /> 
