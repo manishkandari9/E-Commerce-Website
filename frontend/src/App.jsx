@@ -21,8 +21,9 @@ import BentoCard from './components/page/BentoCard';
 import Footer from './components/page/footer';
 import FooterSkeleton from './Skelton/footer-skeleton';
 import BookingForm from './components/page/Booking';
-// import BookingSkeletonLoader from './Skelton/bookingSkeletonLoader';
+// import BookingSkeletonLoader from './Skelton/bookingSkeletonLoader'; // 👈 Commented out
 import SmartItineraryGenerator from './pages/smart-itinerary-generator';
+
 function App() {
   return (
     <Router>
@@ -32,8 +33,8 @@ function App() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/explore" element={<ExploreDestinations />} />
           <Route path="/skeleton" element={<SkeletonCard />} />
-          <Route path="/attractions" element={<AttractionsPage />} />          
-          <Route path="/attractions-skeleton" element={<AttractionsSkeleton />} />  
+          <Route path="/attractions" element={<AttractionsPage />} />
+          <Route path="/attractions-skeleton" element={<AttractionsSkeleton />} />
           <Route path="/gallery" element={<TourismGallery />} />
           <Route path="/skeleton-gallery-loader" element={<SkeletonGalleryLoader />} />
           <Route path="/tourism" element={<TourismSection />} />
@@ -47,7 +48,7 @@ function App() {
           <Route path="/footer" element={<Footer />} />
           <Route path="/footer-skeleton" element={<FooterSkeleton />} />
           <Route path="/booking" element={<BookingForm />} />
-          // <Route path="/Booking-Skeleton-Loader" element={<BookingSkeletonLoader />} />
+          {/* <Route path="/Booking-Skeleton-Loader" element={<BookingSkeletonLoader />} /> */}
           <Route path="/smart-itinerary-generator" element={<SmartItineraryGenerator />} />
         </Routes>
       </div>
