@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { CalendarIcon, UsersIcon, BedDoubleIcon, CreditCardIcon, MapPinIcon, StarIcon } from 'lucide-react';
-import BookingSkeletonLoader from '../../Skelton/bookingSkeletonLoader';
+// import BookingSkeletonLoader from '../../Skelton/bookingSkeletonLoader';
 
 const BookingPage = () => {
   const location = useLocation();
